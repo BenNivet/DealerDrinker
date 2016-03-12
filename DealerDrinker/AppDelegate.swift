@@ -37,9 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             colorArray += ["clubs","diamonds","hearts","spades"]
             valueArray += ["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"]
             let managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+            
+            var i = 0
+            
             for value in valueArray {
                 for color in colorArray{
-
+                    
                     let newItem: Cards = NSEntityDescription.insertNewObjectForEntityForName("Cards", inManagedObjectContext: managedContext) as! Cards
                     newItem.color = color
                     newItem.value = value

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionCards: UICollectionView!
     var cardsArray = [String]()
+    var cardsValue = [String]()
+    var isInDeck = [Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,107 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         // Create array of card
         self.fillCardsArrayInit()
+        self.fillCardsValueInit()
+        self.isInDeckInit()
+        self.cardIsInDeck()
+        
     
         
+    }
+    
+    func isInDeckInit(){
+        for i in 1...13{
+                isInDeck += [true]
+        }
+    }
+    
+    func cardIsInDeck() {
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        //let fetchRequest = NSFetchRequest(entityName: "Cards")
+        
+        let fetchRequest = NSFetchRequest(entityName: "Cards")
+        
+        //3
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let cards = results as! [Cards]
+            for card in cards{
+                if (card.value == "ace"){
+                    print(card.inDeck)
+                    if (card.inDeck == false){
+                        isInDeck[0] = false
+                    }
+                }
+                if (card.value == "2"){
+                    if (card.inDeck == false){
+                        isInDeck[1] = false
+                    }
+                }
+                if (card.value == "3"){
+                    if (card.inDeck == false){
+                        isInDeck[2] = false
+                    }
+                }
+                if (card.value == "4"){
+                    if (card.inDeck == false){
+                        isInDeck[3] = false
+                    }
+                }
+                if (card.value == "5"){
+                    if (card.inDeck == false){
+                        isInDeck[4] = false
+                    }
+                }
+                if (card.value == "6"){
+                    if (card.inDeck == false){
+                        isInDeck[5] = false
+                    }
+                }
+                if (card.value == "7"){
+                    if (card.inDeck == false){
+                        isInDeck[6] = false
+                    }
+                }
+                if (card.value == "8"){
+                    if (card.inDeck == false){
+                        isInDeck[7] = false
+                    }
+                }
+                if (card.value == "9"){
+                    if (card.inDeck == false){
+                        isInDeck[8] = false
+                    }
+                }
+                if (card.value == "10"){
+                    if (card.inDeck == false){
+                        isInDeck[9] = false
+                    }
+                }
+                if (card.value == "jack"){
+                    if (card.inDeck == false){
+                        isInDeck[10] = false
+                    }
+                }
+                if (card.value == "queen"){
+                    if (card.inDeck == false){
+                        isInDeck[11] = false
+                    }
+                }
+                if (card.value == "king"){
+                    if (card.inDeck == false){
+                        isInDeck[12] = false
+                    }
+                }
+                
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -49,7 +151,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         cell.imageCard.image = UIImage(named: cardsArray[indexPath.row])
         
-        cell.imageCard.alpha = 0.3
+        if (isInDeck[indexPath.row]==true){
+            cell.imageCard.alpha = 0.3
+            
+        }
         
         return cell
     }
@@ -83,6 +188,31 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
     }
+
+    func fillCardsValueInit() {
+        var cardName = ""
+        for index in 1...13 {
+            if index == 1 {
+                // Case ACE
+                cardName = "ace"
+            } else if index == 11 {
+                // Case JACK
+                cardName = "jack"
+            } else if index == 12 {
+                // Case QUEEN
+                cardName =  "queen"
+            } else if index == 13 {
+                // Case KING
+                cardName =  "king"
+            } else {
+                // Case Other Card
+                cardName = "\(index)"
+            }
+            self.cardsArray += [cardName]
+        }
+        
+    }
+
     
 
     /*
