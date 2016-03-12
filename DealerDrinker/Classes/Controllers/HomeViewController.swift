@@ -10,9 +10,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Set HMI style
+        self.updateHMI()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +27,29 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func updateHMI() {
+        
+        // Set buttons style
+        self.startButton.layer.cornerRadius = 15
+        self.startButton.layer.borderWidth = 1
+        self.startButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.startButton.clipsToBounds = true;
+        
+        self.button2.layer.cornerRadius = 15
+        self.button2.layer.borderWidth = 1
+        self.button2.layer.borderColor = UIColor.blackColor().CGColor
+        self.button2.clipsToBounds = true;
+        
+        self.settingsButton.layer.cornerRadius = 15
+        self.settingsButton.layer.borderWidth = 1
+        self.settingsButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.settingsButton.clipsToBounds = true;
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Segue
+    }
 
 }
 

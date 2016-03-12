@@ -127,6 +127,7 @@
 		1955E9EC1C8F6A3200A5B20B /* Spades King@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955E97C1C8F6A3200A5B20B /* Spades King@2x.png */; };
 		1955E9ED1C8F6A3200A5B20B /* Spades Queen.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955E97D1C8F6A3200A5B20B /* Spades Queen.png */; };
 		1955E9EE1C8F6A3200A5B20B /* Spades Queen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955E97E1C8F6A3200A5B20B /* Spades Queen@2x.png */; };
+		1955E9F01C94252100A5B20B /* GreyBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955E9EF1C94252100A5B20B /* GreyBack.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +274,7 @@
 		1955E97C1C8F6A3200A5B20B /* Spades King@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Spades King@2x.png"; sourceTree = "<group>"; };
 		1955E97D1C8F6A3200A5B20B /* Spades Queen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Spades Queen.png"; sourceTree = "<group>"; };
 		1955E97E1C8F6A3200A5B20B /* Spades Queen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Spades Queen@2x.png"; sourceTree = "<group>"; };
+		1955E9EF1C94252100A5B20B /* GreyBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreyBack.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +385,7 @@
 		1955E90E1C8F6A3100A5B20B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1955E9EF1C94252100A5B20B /* GreyBack.png */,
 				1955E90F1C8F6A3100A5B20B /* Back.png */,
 				1955E9101C8F6A3100A5B20B /* Back@2x.png */,
 				1955E9111C8F6A3100A5B20B /* Clubs 10.png */,
@@ -670,6 +673,7 @@
 				1955E9DA1C8F6A3200A5B20B /* Spades 3@2x.png in Resources */,
 				1955E9D71C8F6A3200A5B20B /* Spades 2.png in Resources */,
 				1955E98F1C8F6A3200A5B20B /* Clubs 8.png in Resources */,
+				1955E9F01C94252100A5B20B /* GreyBack.png in Resources */,
 				1955E99B1C8F6A3200A5B20B /* Darken.png in Resources */,
 				1955E9AF1C8F6A3200A5B20B /* Diamonds 9.png in Resources */,
 				1955E9E81C8F6A3200A5B20B /* Spades Ace@2x.png in Resources */,
@@ -886,8 +890,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = DealerDrinker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Nivet.DealerDrinker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -898,8 +904,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = DealerDrinker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Nivet.DealerDrinker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -973,6 +981,7 @@
 				1955E9021C8F66FF00A5B20B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1955E9031C8F66FF00A5B20B /* Build configuration list for PBXNativeTarget "DealerDrinkerTests" */ = {
 			isa = XCConfigurationList;
@@ -981,6 +990,7 @@
 				1955E9051C8F66FF00A5B20B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1955E9061C8F66FF00A5B20B /* Build configuration list for PBXNativeTarget "DealerDrinkerUITests" */ = {
 			isa = XCConfigurationList;
@@ -989,6 +999,7 @@
 				1955E9081C8F66FF00A5B20B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
