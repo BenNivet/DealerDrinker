@@ -17,9 +17,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let initialized :Bool = defaults.boolForKey("isInitialized"){
+            if (initialized == false){
+                initializedDataBase()
+            }else{
+                NSLog("Data are already initialized")
+            }
+        }
+        
         return true
     }
 
+        
+        func initializedDataBase () {
+            NSLog("Initilization of the database ")
+            var colorArray = [String]()
+            var valueArray = [String]()
+            colorArray += ["clubs","diamonds","hearts","spades"]
+            valueArray += ["ace","2","3","4","5","6","7","8","9","10","jack","queen","king"]
+            let managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+            for value in valueArray {
+                for color in colorArray{
+
+                    let newItem: Cards = NSEntityDescription.insertNewObjectForEntityForName("Cards", inManagedObjectContext: managedContext) as! Cards
+                    newItem.color = color
+                    newItem.value = value
+                    newItem.inDeck = true
+                    
+//                    
+//                    
+//                    let entity =  NSEntityDescription.entityForName("Cards", inManagedObjectContext:managedContext)
+//                    
+//                    let cards = NSManagedObject(entity: entity!,
+//                        insertIntoManagedObjectContext: managedContext)
+//                    cards.setValue(color, forKey: "color")
+//                    cards.setValue(value, forKey: "value")
+//                    cards.setValue(true, forKey: "inDeck")
+
+                    do {
+                        try managedContext.save()
+                        
+                    } catch let error as NSError  {
+                        print("Could not save \(error), \(error.userInfo)")
+                    }
+                    //NSLog("Inserted New Family for \(newItem) ")
+
+                }
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setBool(true, forKey: "isInitialized" )
+            }
+
+        }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -91,6 +141,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return managedObjectContext
     }()
 
+    
+//    lazy var managedObjectModel: NSManagedObjectModel = {
+//        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+//        let modelURL = NSBundle.mainBundle().URLForResource("DataModelDB", withExtension: "momd")!
+//        return NSManagedObjectModel(contentsOfURL: modelURL)!
+//    }()
+    
+    
+    
     // MARK: - Core Data Saving support
 
     func saveContext () {
