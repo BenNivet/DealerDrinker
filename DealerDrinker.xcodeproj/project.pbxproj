@@ -136,6 +136,8 @@
 		1955EA061C94872300A5B20B /* NbPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA051C94872300A5B20B /* NbPlayersViewController.swift */; };
 		1955EA081C94977B00A5B20B /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA071C94977B00A5B20B /* PlayersTableViewController.swift */; };
 		1955EA0A1C949F4000A5B20B /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA091C949F4000A5B20B /* PlayerTableViewCell.swift */; };
+		1955EA0C1C94C05600A5B20B /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */; };
+		1955EA0E1C94C74D00A5B20B /* Games-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955EA0D1C94C74D00A5B20B /* Games-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +293,8 @@
 		1955EA051C94872300A5B20B /* NbPlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NbPlayersViewController.swift; sourceTree = "<group>"; };
 		1955EA071C94977B00A5B20B /* PlayersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
 		1955EA091C949F4000A5B20B /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
+		1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		1955EA0D1C94C74D00A5B20B /* Games-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Games-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,10 +381,10 @@
 		1955E9091C8F6A1000A5B20B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1955EA0F1C94C84000A5B20B /* Old */,
 				1955E90A1C8F6A1000A5B20B /* HomeViewController.swift */,
 				1955EA031C945CD300A5B20B /* GameViewController.swift */,
-				1955EA051C94872300A5B20B /* NbPlayersViewController.swift */,
-				1955EA071C94977B00A5B20B /* PlayersTableViewController.swift */,
+				1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */,
 			);
 			name = Controllers;
 			path = Classes/Controllers;
@@ -397,6 +401,7 @@
 		1955E90E1C8F6A3100A5B20B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1955EA0D1C94C74D00A5B20B /* Games-icon.png */,
 				1955E9F11C944A1600A5B20B /* backButton.png */,
 				1955E9EF1C94252100A5B20B /* GreyBack.png */,
 				1955E90F1C8F6A3100A5B20B /* Back.png */,
@@ -549,6 +554,15 @@
 			);
 			name = Constants;
 			path = Classes/Constants;
+			sourceTree = "<group>";
+		};
+		1955EA0F1C94C84000A5B20B /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				1955EA051C94872300A5B20B /* NbPlayersViewController.swift */,
+				1955EA071C94977B00A5B20B /* PlayersTableViewController.swift */,
+			);
+			name = Old;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -741,6 +755,7 @@
 				1955E9A61C8F6A3200A5B20B /* Diamonds 4@2x.png in Resources */,
 				1955E9BB1C8F6A3200A5B20B /* Hearts 10.png in Resources */,
 				1955E9A71C8F6A3200A5B20B /* Diamonds 5.png in Resources */,
+				1955EA0E1C94C74D00A5B20B /* Games-icon.png in Resources */,
 				1955E9B21C8F6A3200A5B20B /* Diamonds Ace@2x.png in Resources */,
 				1955E98A1C8F6A3200A5B20B /* Clubs 5@2x.png in Resources */,
 				1955E98E1C8F6A3200A5B20B /* Clubs 7@2x.png in Resources */,
@@ -799,6 +814,7 @@
 				1955EA041C945CD300A5B20B /* GameViewController.swift in Sources */,
 				1955EA001C944EE000A5B20B /* Constants.swift in Sources */,
 				1955EA0A1C949F4000A5B20B /* PlayerTableViewCell.swift in Sources */,
+				1955EA0C1C94C05600A5B20B /* PlayersViewController.swift in Sources */,
 				1955E90D1C8F6A1000A5B20B /* HomeViewController.swift in Sources */,
 				1955E8E11C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld in Sources */,
 				1955E9F71C944D1D00A5B20B /* DismissSegue.swift in Sources */,
