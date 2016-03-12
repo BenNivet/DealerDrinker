@@ -10,11 +10,22 @@ import UIKit
 import CoreData
 
 class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
+    @IBOutlet weak var dealerName: UILabel!
+    @IBOutlet weak var playerName: UILabel!
+    
+    
+    
     @IBOutlet weak var collectionCards: UICollectionView!
     var cardsArray = [String]()
     var cardsValue = [String]()
     var isInDeck = [Bool]()
+    
+    var nameDealer : String = ""
+    var namePlayer :String = ""
+    var idDealer : Int = -1
+    var idPlayer : Int = 1
+    var nbPlayers : Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +38,88 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.fillCardsValueInit()
         self.isInDeckInit()
         self.cardIsInDeck()
+        //self.getNbPlayer()
+        //self.getDealer()
+        //self.playerNameSetter(idPlayer)
         
+        
+    }
     
+    func getNbPlayer(){
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
         
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Stats")
+        
+        //3
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let stats = results as! [Stats]
+            for stat in stats{
+                nbPlayers = stat.nbPlayers
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+    }
+    func getDealer() {
+        let nbPlayer = nbPlayers - 1
+        idDealer = Int(arc4random_uniform(UInt32(nbPlayers)))
+        
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Players")
+        
+        //3
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let players = results as! [Players]
+            dealerName.text = "Dealer name : \(players[idDealer+1].name)"
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+        //TODO changer la valeur du champ nbdealer dans la base pour pondérer plus tard !
+        
+    }
+    
+    func getPlayer() {
+        if (idPlayer == idDealer){
+            if (idPlayer == nbPlayers){
+                idPlayer == 1
+            }else{
+                idPlayer += 1
+            }
+        }
+    }
+    
+    func playerNameSetter(idPlayer : Int){
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Players")
+        
+        //3
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let players = results as! [Players]
+            playerName.text = "Player name : \(players[idPlayer].name)"
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
     }
     
     func isInDeckInit(){
         for i in 1...13{
-                isInDeck += [true]
+            isInDeck += [true]
         }
     }
     
@@ -124,16 +209,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let fetchError = error as NSError
             print(fetchError)
         }
-
+        
     }
     
-    override func viewDidAppear(animated: Bool) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(1, forKey: "isGaming")
-
-    }
-
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -188,7 +266,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
     }
-
+    
     func fillCardsValueInit() {
         var cardName = ""
         for index in 1...13 {
@@ -212,17 +290,17 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
     }
-
     
-
+    
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

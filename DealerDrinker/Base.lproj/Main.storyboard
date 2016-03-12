@@ -164,24 +164,48 @@
                                     <outlet property="delegate" destination="5Z6-uA-9VG" id="Kvy-WO-8kH"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-6d-vro">
+                                <rect key="frame" x="279" y="10" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="dP3-bA-rsd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-KM-j4u">
+                                <rect key="frame" x="279" y="38" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="VvU-JN-cN5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="bottom" secondItem="EeL-qU-G2k" secondAttribute="top" id="066-jM-r2i"/>
+                            <constraint firstItem="NOe-6d-vro" firstAttribute="top" secondItem="Xu8-Ck-DdI" secondAttribute="topMargin" constant="10" id="15K-qW-kDg"/>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leading" id="3uD-sz-qlW"/>
                             <constraint firstItem="sbg-x9-qrt" firstAttribute="top" secondItem="OmP-ht-4xQ" secondAttribute="bottom" constant="20" id="BAc-oq-KL1"/>
+                            <constraint firstItem="L9r-KM-j4u" firstAttribute="centerX" secondItem="Xu8-Ck-DdI" secondAttribute="centerX" id="HI3-MD-wdw"/>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="top" secondItem="Xu8-Ck-DdI" secondAttribute="top" id="IOl-dt-1Om"/>
                             <constraint firstItem="OmP-ht-4xQ" firstAttribute="top" secondItem="IA2-8b-VUq" secondAttribute="bottom" constant="20" id="LbF-7P-7ht"/>
                             <constraint firstItem="OmP-ht-4xQ" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leadingMargin" id="OOa-sD-rQz"/>
+                            <constraint firstItem="NOe-6d-vro" firstAttribute="centerX" secondItem="Xu8-Ck-DdI" secondAttribute="centerX" id="Pkc-EW-fM0"/>
                             <constraint firstItem="sbg-x9-qrt" firstAttribute="trailing" secondItem="Xu8-Ck-DdI" secondAttribute="trailingMargin" id="d6B-uS-eyw"/>
                             <constraint firstItem="EeL-qU-G2k" firstAttribute="top" secondItem="sbg-x9-qrt" secondAttribute="bottom" constant="20" id="iqa-dE-ffd"/>
                             <constraint firstItem="sbg-x9-qrt" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leadingMargin" id="pjG-3z-zCJ"/>
                             <constraint firstAttribute="trailing" secondItem="lCo-7G-RaZ" secondAttribute="trailing" id="s3C-GY-GtS"/>
+                            <constraint firstItem="L9r-KM-j4u" firstAttribute="top" secondItem="NOe-6d-vro" secondAttribute="bottom" constant="300" id="tje-vb-lR4"/>
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="collectionCards" destination="sbg-x9-qrt" id="9RS-wD-nSV"/>
+                        <outlet property="dealerName" destination="NOe-6d-vro" id="Rff-5T-pzz"/>
+                        <outlet property="playerName" destination="L9r-KM-j4u" id="M5C-vD-q5Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIU-qh-2ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -284,6 +308,7 @@
                         <outlet property="labelPlayer" destination="yng-cs-VbZ" id="8dV-VO-81Y"/>
                         <outlet property="submitPlayer" destination="A3d-As-Nbn" id="XNr-iK-mWX"/>
                         <outlet property="textFieldPlayer" destination="jk4-WS-KQk" id="25P-uH-qPi"/>
+                        <segue destination="5Z6-uA-9VG" kind="show" identifier="gameSegue" id="jWj-YE-4L1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26s-rn-am7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -299,6 +324,6 @@
         <image name="backButton.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hiC-X5-1oy"/>
+        <segue reference="mzc-MS-Vse"/>
     </inferredMetricsTieBreakers>
 </document>

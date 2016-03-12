@@ -54,6 +54,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     @IBAction func submitAction(sender: AnyObject) {
         NSLog("PVC - Submit player")
         // TODO Add nbPlayer to DB
+        performSegueWithIdentifier("gameSegue", sender: nil)
     }
     
     /*

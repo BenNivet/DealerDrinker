@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12828A451C94D53A003AFBB9 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A421C94D53A003AFBB9 /* Players.swift */; };
+		12828A461C94D53A003AFBB9 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A431C94D53A003AFBB9 /* Cards.swift */; };
+		12828A471C94D53A003AFBB9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A441C94D53A003AFBB9 /* Stats.swift */; };
 		1955E8D91C8F66FF00A5B20B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955E8D81C8F66FF00A5B20B /* AppDelegate.swift */; };
 		1955E8DE1C8F66FF00A5B20B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1955E8DC1C8F66FF00A5B20B /* Main.storyboard */; };
 		1955E8E11C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1955E8DF1C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld */; };
@@ -158,6 +161,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12828A421C94D53A003AFBB9 /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Players.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Players.swift"; sourceTree = "<group>"; };
+		12828A431C94D53A003AFBB9 /* Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cards.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Cards.swift"; sourceTree = "<group>"; };
+		12828A441C94D53A003AFBB9 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Stats.swift"; sourceTree = "<group>"; };
 		1955E8D51C8F66FF00A5B20B /* DealerDrinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DealerDrinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1955E8D81C8F66FF00A5B20B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1955E8DD1C8F66FF00A5B20B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -393,6 +399,9 @@
 		1955E90B1C8F6A1000A5B20B /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				12828A421C94D53A003AFBB9 /* Players.swift */,
+				12828A431C94D53A003AFBB9 /* Cards.swift */,
+				12828A441C94D53A003AFBB9 /* Stats.swift */,
 			);
 			name = DataModel;
 			path = Classes/DataModel;
@@ -811,7 +820,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12828A451C94D53A003AFBB9 /* Players.swift in Sources */,
+				12828A461C94D53A003AFBB9 /* Cards.swift in Sources */,
 				1955EA041C945CD300A5B20B /* GameViewController.swift in Sources */,
+				12828A471C94D53A003AFBB9 /* Stats.swift in Sources */,
 				1955EA001C944EE000A5B20B /* Constants.swift in Sources */,
 				1955EA0A1C949F4000A5B20B /* PlayerTableViewCell.swift in Sources */,
 				1955EA0C1C94C05600A5B20B /* PlayersViewController.swift in Sources */,
