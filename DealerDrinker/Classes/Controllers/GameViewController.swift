@@ -24,6 +24,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(1, forKey: "isGaming")
+
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
