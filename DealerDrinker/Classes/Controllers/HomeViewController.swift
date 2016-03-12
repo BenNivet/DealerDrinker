@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         NSLog("\(__FUNCTION__) END")
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
