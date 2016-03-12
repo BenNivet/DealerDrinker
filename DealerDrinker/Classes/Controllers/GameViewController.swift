@@ -41,11 +41,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let cell: CardCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("cardCell", forIndexPath: indexPath) as! CardCollectionViewCell
         
         cell.imageCard.image = UIImage(named: cardsArray[indexPath.row])
-        cell.imageCard.alpha = 0.3
         
-        if (indexPath.row == 3 || indexPath.row == 7 || indexPath.row == 10) {
-            cell.imageCard.alpha = 1
-        }
+        cell.imageCard.alpha = 0.3
         
         return cell
     }
