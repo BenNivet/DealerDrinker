@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="379.5" y="290"/>
         </scene>
-        <!--toto-->
+        <!--Game View Controller-->
         <scene sceneID="tye-wl-QU1">
             <objects>
-                <viewController id="5Z6-uA-9VG" sceneMemberID="viewController">
+                <viewController id="5Z6-uA-9VG" customClass="GameViewController" customModule="DealerDrinker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IA2-8b-VUq"/>
                         <viewControllerLayoutGuide type="bottom" id="EeL-qU-G2k"/>
@@ -113,18 +113,76 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Felt.png" translatesAutoresizingMaskIntoConstraints="NO" id="lCo-7G-RaZ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OmP-ht-4xQ">
+                                <rect key="frame" x="20" y="40" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="J7x-wD-Qku"/>
+                                    <constraint firstAttribute="width" constant="50" id="axD-WJ-0kN"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="backButton.png"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="custom" identifier="dismissGameSegue" customClass="DismissSegue" id="mDY-zD-jdd"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sbg-x9-qrt">
+                                <rect key="frame" x="20" y="110" width="560" height="470"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wgT-p9-bz6">
+                                    <size key="itemSize" width="75" height="110"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCell" id="MDS-R9-TCp" customClass="CardCollectionViewCell" customModule="DealerDrinker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="110"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back.png" translatesAutoresizingMaskIntoConstraints="NO" id="PK0-Im-Yat">
+                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="110"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="PK0-Im-Yat" firstAttribute="top" secondItem="MDS-R9-TCp" secondAttribute="top" id="Rtc-LF-9x0"/>
+                                            <constraint firstItem="PK0-Im-Yat" firstAttribute="leading" secondItem="MDS-R9-TCp" secondAttribute="leading" id="WvR-p9-ht4"/>
+                                            <constraint firstAttribute="bottom" secondItem="PK0-Im-Yat" secondAttribute="bottom" id="vW9-qy-802"/>
+                                            <constraint firstAttribute="trailing" secondItem="PK0-Im-Yat" secondAttribute="trailing" id="w9b-3n-enR"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageCard" destination="PK0-Im-Yat" id="VIZ-Bi-maA"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="5Z6-uA-9VG" id="B0A-5a-98b"/>
+                                    <outlet property="delegate" destination="5Z6-uA-9VG" id="Kvy-WO-8kH"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="bottom" secondItem="EeL-qU-G2k" secondAttribute="top" id="066-jM-r2i"/>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leading" id="3uD-sz-qlW"/>
+                            <constraint firstItem="sbg-x9-qrt" firstAttribute="top" secondItem="OmP-ht-4xQ" secondAttribute="bottom" constant="20" id="BAc-oq-KL1"/>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="top" secondItem="Xu8-Ck-DdI" secondAttribute="top" id="IOl-dt-1Om"/>
+                            <constraint firstItem="OmP-ht-4xQ" firstAttribute="top" secondItem="IA2-8b-VUq" secondAttribute="bottom" constant="20" id="LbF-7P-7ht"/>
+                            <constraint firstItem="OmP-ht-4xQ" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leadingMargin" id="OOa-sD-rQz"/>
+                            <constraint firstItem="sbg-x9-qrt" firstAttribute="trailing" secondItem="Xu8-Ck-DdI" secondAttribute="trailingMargin" id="d6B-uS-eyw"/>
+                            <constraint firstItem="EeL-qU-G2k" firstAttribute="top" secondItem="sbg-x9-qrt" secondAttribute="bottom" constant="20" id="iqa-dE-ffd"/>
+                            <constraint firstItem="sbg-x9-qrt" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leadingMargin" id="pjG-3z-zCJ"/>
                             <constraint firstAttribute="trailing" secondItem="lCo-7G-RaZ" secondAttribute="trailing" id="s3C-GY-GtS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="toto" id="a0X-20-EML">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="wgp-Ku-207"/>
-                    </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="collectionCards" destination="sbg-x9-qrt" id="9RS-wD-nSV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIU-qh-2ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,7 +190,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Back.png" width="67" height="99"/>
         <image name="Felt.png" width="480" height="320"/>
         <image name="GreyBack.png" width="900" height="506"/>
+        <image name="backButton.png" width="128" height="128"/>
     </resources>
 </document>

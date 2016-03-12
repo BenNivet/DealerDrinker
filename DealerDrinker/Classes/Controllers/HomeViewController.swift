@@ -16,9 +16,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSLog("\(__FUNCTION__) BEGIN")
         // Set HMI style
         self.updateHMI()
+        
+        NSLog("\(__FUNCTION__) END")
         
     }
 
@@ -28,6 +30,7 @@ class HomeViewController: UIViewController {
     }
 
     func updateHMI() {
+        NSLog("\(__FUNCTION__) BEGIN")
         
         // Set buttons style
         self.startButton.layer.cornerRadius = 15
@@ -43,7 +46,10 @@ class HomeViewController: UIViewController {
         self.settingsButton.layer.cornerRadius = 15
         self.settingsButton.layer.borderWidth = 1
         self.settingsButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.settingsButton.clipsToBounds = true;
+        self.settingsButton.clipsToBounds = true
+        
+        NSLog("\(__FUNCTION__) END")
+
         
     }
     
