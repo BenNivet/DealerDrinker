@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12828A451C94D53A003AFBB9 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A421C94D53A003AFBB9 /* Players.swift */; };
-		12828A461C94D53A003AFBB9 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A431C94D53A003AFBB9 /* Cards.swift */; };
-		12828A471C94D53A003AFBB9 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12828A441C94D53A003AFBB9 /* Stats.swift */; };
 		1955E8D91C8F66FF00A5B20B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955E8D81C8F66FF00A5B20B /* AppDelegate.swift */; };
 		1955E8DE1C8F66FF00A5B20B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1955E8DC1C8F66FF00A5B20B /* Main.storyboard */; };
 		1955E8E11C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1955E8DF1C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld */; };
@@ -141,6 +138,9 @@
 		1955EA0A1C949F4000A5B20B /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA091C949F4000A5B20B /* PlayerTableViewCell.swift */; };
 		1955EA0C1C94C05600A5B20B /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */; };
 		1955EA0E1C94C74D00A5B20B /* Games-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1955EA0D1C94C74D00A5B20B /* Games-icon.png */; };
+		1955EA121C94DA9500A5B20B /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA101C94DA9500A5B20B /* Cards.swift */; };
+		1955EA131C94DA9500A5B20B /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA111C94DA9500A5B20B /* Players.swift */; };
+		1955EA151C94DAF100A5B20B /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA141C94DAF100A5B20B /* Stats.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,9 +161,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12828A421C94D53A003AFBB9 /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Players.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Players.swift"; sourceTree = "<group>"; };
-		12828A431C94D53A003AFBB9 /* Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cards.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Cards.swift"; sourceTree = "<group>"; };
-		12828A441C94D53A003AFBB9 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = "../../../../../Downloads/DealerDrinker-feature-GameV1/DealerDrinker/Classes/dataModel/Stats.swift"; sourceTree = "<group>"; };
 		1955E8D51C8F66FF00A5B20B /* DealerDrinker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DealerDrinker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1955E8D81C8F66FF00A5B20B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1955E8DD1C8F66FF00A5B20B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -301,6 +298,9 @@
 		1955EA091C949F4000A5B20B /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		1955EA0D1C94C74D00A5B20B /* Games-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Games-icon.png"; sourceTree = "<group>"; };
+		1955EA101C94DA9500A5B20B /* Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
+		1955EA111C94DA9500A5B20B /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		1955EA141C94DAF100A5B20B /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,9 +399,9 @@
 		1955E90B1C8F6A1000A5B20B /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				12828A421C94D53A003AFBB9 /* Players.swift */,
-				12828A431C94D53A003AFBB9 /* Cards.swift */,
-				12828A441C94D53A003AFBB9 /* Stats.swift */,
+				1955EA101C94DA9500A5B20B /* Cards.swift */,
+				1955EA111C94DA9500A5B20B /* Players.swift */,
+				1955EA141C94DAF100A5B20B /* Stats.swift */,
 			);
 			name = DataModel;
 			path = Classes/DataModel;
@@ -820,13 +820,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12828A451C94D53A003AFBB9 /* Players.swift in Sources */,
-				12828A461C94D53A003AFBB9 /* Cards.swift in Sources */,
+				1955EA121C94DA9500A5B20B /* Cards.swift in Sources */,
 				1955EA041C945CD300A5B20B /* GameViewController.swift in Sources */,
-				12828A471C94D53A003AFBB9 /* Stats.swift in Sources */,
 				1955EA001C944EE000A5B20B /* Constants.swift in Sources */,
+				1955EA151C94DAF100A5B20B /* Stats.swift in Sources */,
 				1955EA0A1C949F4000A5B20B /* PlayerTableViewCell.swift in Sources */,
 				1955EA0C1C94C05600A5B20B /* PlayersViewController.swift in Sources */,
+				1955EA131C94DA9500A5B20B /* Players.swift in Sources */,
 				1955E90D1C8F6A1000A5B20B /* HomeViewController.swift in Sources */,
 				1955E8E11C8F66FF00A5B20B /* DealerDrinker.xcdatamodeld in Sources */,
 				1955E9F71C944D1D00A5B20B /* DismissSegue.swift in Sources */,

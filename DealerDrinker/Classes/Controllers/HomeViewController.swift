@@ -21,33 +21,6 @@ class HomeViewController: UIViewController {
         // Set HMI style
         self.updateHMI()
         
-        // Initialize Fetch Request
-        //let fetchRequest = NSFetchRequest()
-        
-        // Create Entity Description
-        
-        // How to retrieve data in the database !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-//        let appDelegate =
-//        UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let managedContext = appDelegate.managedObjectContext
-//        //let fetchRequest = NSFetchRequest(entityName: "Cards")
-//        
-//        let fetchRequest = NSFetchRequest(entityName: "Cards")
-//        
-//        //3
-//        do {
-//            let results = try managedContext.executeFetchRequest(fetchRequest)
-//            let people = results as! [Cards]
-//            for peo in people{
-//            print(peo.color)
-//            }
-//        } catch {
-//            let fetchError = error as NSError
-//            print(fetchError)
-//        }
-        
         NSLog("\(__FUNCTION__) END")
         
     }

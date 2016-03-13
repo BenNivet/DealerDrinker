@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 
-
-@objc(Cards)
 class Cards: NSManagedObject {
     @NSManaged var color : String
     @NSManaged var value: String

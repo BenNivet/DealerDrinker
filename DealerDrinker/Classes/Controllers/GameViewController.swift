@@ -33,44 +33,47 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionCards.delegate = self
         self.collectionCards.dataSource = self
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(1, forKey: "isGaming")
+        
         // Create array of card
         self.fillCardsArrayInit()
         self.fillCardsValueInit()
         self.isInDeckInit()
         self.cardIsInDeck()
-        //self.getNbPlayer()
-        //self.getDealer()
-        //self.playerNameSetter(idPlayer)
+        self.getNbPlayer()
+        self.getDealer()
+        self.playerNameSetter(idPlayer)
         
         
     }
     
     func getNbPlayer(){
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: "Stats")
         
-        //3
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let stats = results as! [Stats]
             for stat in stats{
-                nbPlayers = stat.nbPlayers
+                nbPlayers = Int(stat.nbPlayers)
+                NSLog("NbPlayer = \(nbPlayers)")
             }
         } catch {
             let fetchError = error as NSError
-            print(fetchError)
+            NSLog(fetchError.debugDescription)
         }
     }
+    
+    
     func getDealer() {
         let nbPlayer = nbPlayers - 1
         idDealer = Int(arc4random_uniform(UInt32(nbPlayers)))
         
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Players")
@@ -128,7 +131,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
-        //let fetchRequest = NSFetchRequest(entityName: "Cards")
         
         let fetchRequest = NSFetchRequest(entityName: "Cards")
         
@@ -138,7 +140,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let cards = results as! [Cards]
             for card in cards{
                 if (card.value == "ace"){
-                    print(card.inDeck)
                     if (card.inDeck == false){
                         isInDeck[0] = false
                     }
@@ -238,7 +239,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Course cell #\(indexPath.row) selected")
+        NSLog("Card cell #\(indexPath.row) selected")
         
     }
     

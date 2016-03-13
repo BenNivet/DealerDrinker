@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="Cards" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Automatic">
-    <entity name="Cards" representedClassName="Cards" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Cards" representedClassName="DealerDrinker.Cards" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inDeck" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Players" syncable="YES">
+    <entity name="Players" representedClassName="DealerDrinker.Players" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nbCardsFound" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="nbDealer" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="nbGiven" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="nbReceived" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="Stats" syncable="YES">
+    <entity name="Stats" representedClassName="DealerDrinker.Stats" syncable="YES">
         <attribute name="nbPlayers" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Cards" positionX="0" positionY="45" width="128" height="88"/>
-        <element name="Players" positionX="-36" positionY="9" width="128" height="120"/>
-        <element name="Stats" positionX="36" positionY="99" width="128" height="60"/>
+        <element name="Cards" positionX="-45" positionY="-36" width="128" height="88"/>
+        <element name="Players" positionX="-234" positionY="-27" width="128" height="118"/>
+        <element name="Stats" positionX="36" positionY="99" width="128" height="58"/>
     </elements>
 </model>
