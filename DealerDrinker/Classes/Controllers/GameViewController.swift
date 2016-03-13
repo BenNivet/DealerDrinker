@@ -13,10 +13,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var dealerName: UILabel!
     @IBOutlet weak var playerName: UILabel!
-    
-    
-    
     @IBOutlet weak var collectionCards: UICollectionView!
+    
     var cardsArray = [String]()
     var cardsValue = [String]()
     var isInDeck = [Bool]()
@@ -115,7 +113,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func isInDeckInit(){
-        for i in 1...13{
+        for _ in 1...13 {
             isInDeck += [true]
         }
     }
