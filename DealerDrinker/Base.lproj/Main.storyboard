@@ -164,22 +164,22 @@
                                     <outlet property="delegate" destination="5Z6-uA-9VG" id="Kvy-WO-8kH"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-6d-vro">
-                                <rect key="frame" x="279" y="10" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dealer name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-6d-vro">
+                                <rect key="frame" x="150" y="10" width="300" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="dP3-bA-rsd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-KM-j4u">
-                                <rect key="frame" x="279" y="38" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-KM-j4u">
+                                <rect key="frame" x="150" y="44" width="300" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="VvU-JN-cN5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -187,6 +187,7 @@
                         <constraints>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="bottom" secondItem="EeL-qU-G2k" secondAttribute="top" id="066-jM-r2i"/>
                             <constraint firstItem="NOe-6d-vro" firstAttribute="top" secondItem="Xu8-Ck-DdI" secondAttribute="topMargin" constant="10" id="15K-qW-kDg"/>
+                            <constraint firstItem="L9r-KM-j4u" firstAttribute="top" secondItem="NOe-6d-vro" secondAttribute="bottom" constant="10" id="18Y-hS-nDx"/>
                             <constraint firstItem="lCo-7G-RaZ" firstAttribute="leading" secondItem="Xu8-Ck-DdI" secondAttribute="leading" id="3uD-sz-qlW"/>
                             <constraint firstItem="sbg-x9-qrt" firstAttribute="top" secondItem="OmP-ht-4xQ" secondAttribute="bottom" constant="20" id="BAc-oq-KL1"/>
                             <constraint firstItem="L9r-KM-j4u" firstAttribute="centerX" secondItem="Xu8-Ck-DdI" secondAttribute="centerX" id="HI3-MD-wdw"/>
@@ -200,6 +201,11 @@
                             <constraint firstAttribute="trailing" secondItem="lCo-7G-RaZ" secondAttribute="trailing" id="s3C-GY-GtS"/>
                             <constraint firstItem="L9r-KM-j4u" firstAttribute="top" secondItem="NOe-6d-vro" secondAttribute="bottom" constant="300" id="tje-vb-lR4"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tje-vb-lR4"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -324,6 +330,6 @@
         <image name="backButton.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hiC-X5-1oy"/>
+        <segue reference="mzc-MS-Vse"/>
     </inferredMetricsTieBreakers>
 </document>

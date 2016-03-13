@@ -17,11 +17,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSLog("\(__FUNCTION__) BEGIN")
         // Set HMI style
         self.updateHMI()
-        
-        NSLog("\(__FUNCTION__) END")
         
     }
     
