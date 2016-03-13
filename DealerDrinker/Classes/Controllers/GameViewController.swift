@@ -70,19 +70,17 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func getDealer() {
-        let nbPlayer = nbPlayers - 1
-        idDealer = Int(arc4random_uniform(UInt32(nbPlayers)))
+        idDealer = Int(arc4random_uniform(UInt32(nbPlayers - 1)))
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Players")
         
-        //3
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let players = results as! [Players]
-            dealerName.text = "Dealer name : \(players[idDealer+1].name)"
+            dealerName.text = "Dealer name : \(players[idDealer].name)"
         } catch {
             let fetchError = error as NSError
             print(fetchError)
@@ -94,11 +92,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func getPlayer() {
         if (idPlayer == idDealer){
-            if (idPlayer == nbPlayers){
-                idPlayer == 1
-            }else{
-                idPlayer += 1
-            }
+            idPlayer += 1 % (nbPlayers - 1)
         }
     }
     
