@@ -33,6 +33,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     var idPlayer : Int = 1
     var nbPlayers : Int = -1
     
+    // Players
+    var players = [String]()
+    var playersDealer = [Int]()
+    
     // Card of the dealer (eg. Hearts 9)
     var dealerCard : String = ""
     // Card of the Gamer (eg. 9)
@@ -63,8 +67,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.cardsStackInit()
         self.cardInDeckInit()
         self.getNbPlayer()
-        self.getDealer()
+        self.getDealerInit()
+        self.getPlayerInit()
         self.playerNameSetter(idPlayer)
+        self.playersDealerInit()
+        self.playersInit()
+        self.incrementNbDealer()
         
     }
     
@@ -86,8 +94,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     
-    func getDealer() {
-        idDealer = Int(arc4random_uniform(UInt32(nbPlayers - 1)))
+    func getDealerInit() {
+        self.idDealer = Int(arc4random_uniform(UInt32(nbPlayers - 1)))
         
         let fetchRequest = NSFetchRequest(entityName: "Players")
         
@@ -96,26 +104,23 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let players = results as! [Players]
             self.nameDealer = players[idDealer].name
             self.dealerName.text = "Dealer name : \(nameDealer)"
+            
         } catch {
             let fetchError = error as NSError
             NSLog(fetchError.debugDescription)
         }
-        
-        //TODO changer la valeur du champ nbdealer dans la base pour pondérer plus tard !
-        
     }
     
-    func getPlayer() {
+    func getPlayerInit() {
         if (idPlayer == idDealer){
-            idPlayer += 1 % (nbPlayers - 1)
+            idPlayer += 1
+            if idPlayer == nbPlayers {
+                idPlayer = 0
+            }
         }
     }
     
     func playerNameSetter(idPlayer : Int){
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Players")
         
         do {
@@ -123,6 +128,27 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let players = results as! [Players]
             self.namePlayer = players[idPlayer].name
             self.playerName.text = "Player name : \(namePlayer)"
+        } catch {
+            let fetchError = error as NSError
+            NSLog(fetchError.debugDescription)
+        }
+    }
+    
+    func namesSetter(){
+
+        let fetchRequest = NSFetchRequest(entityName: "Players")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let players = results as! [Players]
+            
+            // Set namePlayer
+            self.namePlayer = players[idPlayer].name
+            self.playerName.text = "Player name : \(namePlayer)"
+            
+            // Set nameDealer
+            self.nameDealer = players[idDealer].name
+            self.dealerName.text = "Dealer name : \(nameDealer)"
         } catch {
             let fetchError = error as NSError
             NSLog(fetchError.debugDescription)
@@ -201,11 +227,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 // TODO win function
                 self.nbDealerWin = 0
                 self.nbRoundGamer = 0
-                
-                // Set cardStack
-                // Delete card in inDeck array
-                // Add card in ChoosenArray
-                
+
                 // Alert
                 self.displayAlert("\(self.namePlayer) win !", text: "\(self.nameDealer) must drink 5 swallows !")
                 
@@ -232,9 +254,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             if compareResult == 0 {
                 // The gamer win in the second choice
                 self.nbDealerWin = 0
-                // TODO win function
-                // Set cardStack
-                
+        
                 // Alert
                 self.displayAlert("\(self.namePlayer) win !", text: "\(self.nameDealer) must drink 3 swallows !")
                 
@@ -251,9 +271,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.displayAlert("\(self.nameDealer) win !", text: "\(self.namePlayer) must drink \(nbSwallow) \(swallows) !")
             }
         }
-        
-        
-        
         NSLog("\(__FUNCTION__) END")
     }
     
@@ -424,6 +441,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let alertController = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Drinked", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
                 self.resetCardAvailable()
+                self.endRound()
             }))
             
             self.presentViewController(alertController, animated: true, completion: nil)
@@ -436,6 +454,117 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         NSLog("\(__FUNCTION__) END")
     }
     
+    func playersDealerInit() {
+        for i in 1...self.nbPlayers {
+            if i == idDealer {
+                self.playersDealer += [1]
+            }else{
+                self.playersDealer += [0]
+            }
+        }
+    }
+    
+    func playersInit() {
+        let fetchRequest = NSFetchRequest(entityName: "Players")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let players = results as! [Players]
+            for player in players {
+                self.players += [player.name]
+            }
+        } catch {
+            let fetchError = error as NSError
+            NSLog(fetchError.debugDescription)
+        }
+    }
+    
+    func determineDealerPotential() -> (nbDealerPotentiel: Int, dealerPotentielArray: [Int]){
+        //Recuperation du nb deal min
+        var nbDealerMin = 0
+        for i in 0...playersDealer.count - 1 {
+            if i == 0 {
+                nbDealerMin = playersDealer[i]
+            } else {
+                if (playersDealer[i] < nbDealerMin) {
+                    nbDealerMin = playersDealer[i]
+                }
+            }
+        }
+        
+        var nbDealerPotentiel = 0
+        var dealerPotentielArray = [Int]()
+        
+        for i in 0...playersDealer.count - 1 {
+            if (nbDealerMin == playersDealer[i]){
+                nbDealerPotentiel += 1
+                dealerPotentielArray += [i]
+            }
+        }
+        
+        return (nbDealerPotentiel, dealerPotentielArray)
+        
+    }
+    
+    func findDealer(){
+        // Get dealer
+        var nbDealerPotentiel = 0
+        var dealerPotentielArray = [Int]()
+        
+        (nbDealerPotentiel, dealerPotentielArray) = self.determineDealerPotential()
+        
+        let index = Int(arc4random_uniform(UInt32(nbDealerPotentiel - 1)))
+        
+        self.idDealer = dealerPotentielArray[index]
+        
+        }
+    
+    func findPlayer() {
+        idPlayer += 1
+        if idPlayer == nbPlayers {
+            idPlayer = 0
+        }
+        if (idPlayer == idDealer){
+            idPlayer += 1
+            if idPlayer == nbPlayers {
+                idPlayer = 0
+            }
+        }
+        
+        NSLog("IdPlayer = \(idPlayer)")
+    }
+    
+    func endRound() {
+        if (self.nbDealerWin == 3) {
+            // The dealer must change
+            self.incrementNbDealer()
+            self.findDealer()
+            self.findPlayer()
+            self.namesSetter()
+        } else {
+            self.findPlayer()
+            self.namesSetter()
+        }
+    }
+    
+    func incrementNbDealer() {
+        // Update the number of the deal locally
+        self.playersDealer[idDealer] += 1
+        
+        // Update the number of the deal in DB
+        let fetchRequest = NSFetchRequest(entityName: "Players")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let players = results as! [Players]
+            players[idDealer].nbDealer += 1
+            
+            try managedContext.save()
+        } catch {
+            let fetchError = error as NSError
+            NSLog(fetchError.debugDescription)
+        }
+    }
     
     // MARK: - Navigation
     
