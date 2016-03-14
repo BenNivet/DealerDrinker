@@ -353,6 +353,25 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         NSLog("\(__FUNCTION__) END")
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let widthScreen = UIScreen.mainScreen().bounds.size.width
+        NSLog("WidthScreen = \(widthScreen)")
+        // Screen Size
+        if (widthScreen == 736){
+            NSLog("Change size cell : iPhone 6+")
+            return CGSizeMake(92, 136)
+        } else if (widthScreen == 667){
+            //NSLog("Change size cell : iPhone 6")
+            return CGSizeMake(82, 121)
+        }else {
+            NSLog("Change size cell : iPhone 4 ou 5")
+            return CGSizeMake(68, 100)
+        }
+        
+    }
+
+    
     func fillCardsArrayInit() {
         let prefixCardName = "Hearts "
         var cardName = ""
@@ -368,7 +387,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 cardName = prefixCardName + "Queen"
             } else if index == 13 {
                 // Case KING
-                cardName = prefixCardName + "king"
+                cardName = prefixCardName + "King"
             } else {
                 // Case Other Card
                 cardName = prefixCardName + "\(index)"

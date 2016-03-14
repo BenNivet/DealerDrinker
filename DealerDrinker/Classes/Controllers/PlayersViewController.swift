@@ -24,6 +24,9 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: "dismissKeyboard")
+        self.view.addGestureRecognizer(tap)
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(0, forKey: "isGaming")
         
@@ -50,6 +53,10 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func addPlayer(sender: AnyObject) {
@@ -100,7 +107,8 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
             performSegueWithIdentifier("gameSegue", sender: nil)
         } else {
             NSLog("Limit min players incorrect")
-            // TODO Alert
+            // Alert
+            self.displayEndGameAlert()
         }
     }
     
@@ -143,6 +151,20 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func displayEndGameAlert() {
+        let titleAlert = "Error ! "
+        let descriptionAlert = "Please add a minimum of two players."
+        let buttonLabel = "OK"
+        
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // TODO
+        }
+    }
     
     // MARK: - Navigation
     
