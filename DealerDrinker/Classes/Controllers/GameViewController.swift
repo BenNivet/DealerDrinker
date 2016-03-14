@@ -229,7 +229,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.nbRoundGamer = 0
 
                 // Alert
-                self.displayAlert("\(self.namePlayer) win !", text: "\(self.nameDealer) must drink 5 swallows !")
+                self.displayAlert(false, nbSips: 5)
                 
             } else if compareResult == -1 {
                 self.disableCardSecondRound(gamerCardNumber - 1, way: false)
@@ -256,19 +256,16 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.nbDealerWin = 0
         
                 // Alert
-                self.displayAlert("\(self.namePlayer) win !", text: "\(self.nameDealer) must drink 3 swallows !")
+                self.displayAlert(false, nbSips: 3)
                 
             } else {
                 // TODO The dealer win
                 self.nbDealerWin += 1
-                let nbSwallow = abs(dealerCardNumber - gamerCardNumber)
-                var swallows = "swallows"
-                
-                if (nbSwallow == 1) {
-                    swallows = "swallow"
-                }
+                let nbSips = abs(dealerCardNumber - gamerCardNumber)
+
                 // Alert
-                self.displayAlert("\(self.nameDealer) win !", text: "\(self.namePlayer) must drink \(nbSwallow) \(swallows) !")
+                self.displayAlert(true, nbSips: nbSips)
+
             }
         }
         NSLog("\(__FUNCTION__) END")
@@ -434,13 +431,32 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    func displayAlert (title : String, text : String) {
+    func displayAlert (isDealerWin : Bool, nbSips : Int) {
         NSLog("\(__FUNCTION__) BEGIN")
         
+        var titleAlert = ""
+        var descriptionAlert = ""
+        
+        var sips = "sips"
+        if nbSips == 1 {
+            sips = "sip"
+        }
+        
+        if (isDealerWin) {
+            titleAlert = "\(self.nameDealer) wins !"
+            descriptionAlert = "\(self.namePlayer) has to drink \(nbSips) \(sips) !"
+        }else{
+            titleAlert = "\(self.namePlayer) wins !"
+            descriptionAlert = "\(self.nameDealer) has to drink \(nbSips) \(sips) !"
+        }
+        
         if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Drinked", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
                 self.resetCardAvailable()
+                
+                // TODO Update sips drinked locally and in DB
+                
                 self.endRound()
             }))
             

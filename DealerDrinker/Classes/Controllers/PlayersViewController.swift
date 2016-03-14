@@ -38,7 +38,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         emptyPlayersTables()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if let isGaming: Int = defaults.integerForKey("isGaming") {
