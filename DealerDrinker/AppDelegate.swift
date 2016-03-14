@@ -52,12 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 } catch let error as NSError  {
                     print("Could not save \(error), \(error.userInfo)")
                 }
-                //NSLog("Inserted New Family for \(newItem) ")
-                
             }
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setBool(true, forKey: "isInitialized" )
         }
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "isInitialized" )
         
     }
     

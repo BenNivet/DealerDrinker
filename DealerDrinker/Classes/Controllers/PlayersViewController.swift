@@ -79,7 +79,8 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
             
             // Reset field
             labelPlayer.text = "Player \(nbPlayer + 1)"
-            textFieldPlayer.text = ""        }
+            textFieldPlayer.text = ""
+        }
     }
     
     @IBAction func submitAction(sender: AnyObject) {
@@ -114,10 +115,10 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         
         do {
             if let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Players] {
-                
                 for result in fetchResults {
                     context.deleteObject(result)
                 }
+                try context.save()
             }
             
         } catch let error as NSError  {
@@ -129,21 +130,17 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         fetchRequestStats.includesPropertyValues = false
         
         // Get results
-        
         do {
             if let fetchResultsStats = try context.executeFetchRequest(fetchRequestStats) as? [Stats] {
-                
                 for result in fetchResultsStats {
                     context.deleteObject(result)
                 }
+                try context.save()
             }
             
         } catch let error as NSError  {
             NSLog("Could not save \(error)")
         }
-
-        
-        
     }
     
     

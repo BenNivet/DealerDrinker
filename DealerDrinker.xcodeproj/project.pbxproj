@@ -141,6 +141,7 @@
 		1955EA121C94DA9500A5B20B /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA101C94DA9500A5B20B /* Cards.swift */; };
 		1955EA131C94DA9500A5B20B /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA111C94DA9500A5B20B /* Players.swift */; };
 		1955EA151C94DAF100A5B20B /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA141C94DAF100A5B20B /* Stats.swift */; };
+		1955EA171C97588F00A5B20B /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955EA161C97588F00A5B20B /* StatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +302,7 @@
 		1955EA101C94DA9500A5B20B /* Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		1955EA111C94DA9500A5B20B /* Players.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
 		1955EA141C94DAF100A5B20B /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		1955EA161C97588F00A5B20B /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,8 +391,9 @@
 			children = (
 				1955EA0F1C94C84000A5B20B /* Old */,
 				1955E90A1C8F6A1000A5B20B /* HomeViewController.swift */,
-				1955EA031C945CD300A5B20B /* GameViewController.swift */,
 				1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */,
+				1955EA031C945CD300A5B20B /* GameViewController.swift */,
+				1955EA161C97588F00A5B20B /* StatsViewController.swift */,
 			);
 			name = Controllers;
 			path = Classes/Controllers;
@@ -833,6 +836,7 @@
 				1955EA021C945C9900A5B20B /* CardCollectionViewCell.swift in Sources */,
 				1955E8D91C8F66FF00A5B20B /* AppDelegate.swift in Sources */,
 				1955EA061C94872300A5B20B /* NbPlayersViewController.swift in Sources */,
+				1955EA171C97588F00A5B20B /* StatsViewController.swift in Sources */,
 				1955EA081C94977B00A5B20B /* PlayersTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

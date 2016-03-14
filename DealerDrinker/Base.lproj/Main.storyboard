@@ -212,6 +212,7 @@
                         <outlet property="collectionCards" destination="sbg-x9-qrt" id="9RS-wD-nSV"/>
                         <outlet property="dealerName" destination="NOe-6d-vro" id="Rff-5T-pzz"/>
                         <outlet property="playerName" destination="L9r-KM-j4u" id="M5C-vD-q5Y"/>
+                        <segue destination="61E-rK-djm" kind="show" identifier="finishedGameSegue" id="vmk-ic-4mj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIU-qh-2ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -321,6 +322,49 @@
             </objects>
             <point key="canvasLocation" x="1143" y="290"/>
         </scene>
+        <!--Stats View Controller-->
+        <scene sceneID="cEi-ms-j0w">
+            <objects>
+                <viewController id="61E-rK-djm" customClass="StatsViewController" customModule="DealerDrinker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n3b-ID-OXz"/>
+                        <viewControllerLayoutGuide type="bottom" id="UVq-IW-rtB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fn5-Yo-Cy2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Felt.png" translatesAutoresizingMaskIntoConstraints="NO" id="dVp-CB-WoV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9y-6l-oDS">
+                                <rect key="frame" x="20" y="40" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AbU-vd-q90"/>
+                                    <constraint firstAttribute="height" constant="50" id="NFd-xW-4Qf"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="backButton.png"/>
+                                <connections>
+                                    <segue destination="5Z6-uA-9VG" kind="custom" identifier="dismissFinishedPage" customClass="DismissSegue" id="ynl-CD-MTz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I9y-6l-oDS" firstAttribute="leading" secondItem="fn5-Yo-Cy2" secondAttribute="leadingMargin" id="Baa-gN-0og"/>
+                            <constraint firstItem="I9y-6l-oDS" firstAttribute="top" secondItem="n3b-ID-OXz" secondAttribute="bottom" constant="20" id="Bft-DV-6ZY"/>
+                            <constraint firstItem="dVp-CB-WoV" firstAttribute="bottom" secondItem="UVq-IW-rtB" secondAttribute="top" id="Dja-GG-Rf2"/>
+                            <constraint firstItem="dVp-CB-WoV" firstAttribute="top" secondItem="fn5-Yo-Cy2" secondAttribute="top" id="fZa-KK-Qx2"/>
+                            <constraint firstAttribute="trailing" secondItem="dVp-CB-WoV" secondAttribute="trailing" id="flR-us-uVK"/>
+                            <constraint firstItem="dVp-CB-WoV" firstAttribute="leading" secondItem="fn5-Yo-Cy2" secondAttribute="leading" id="gFQ-hc-BV5"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIO-jZ-T2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2494" y="290"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Back.png" width="67" height="99"/>
@@ -330,6 +374,7 @@
         <image name="backButton.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hiC-X5-1oy"/>
+        <segue reference="ynl-CD-MTz"/>
+        <segue reference="mzc-MS-Vse"/>
     </inferredMetricsTieBreakers>
 </document>

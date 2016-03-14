@@ -60,7 +60,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(1, forKey: "isGaming")
         
-        // Create array of card
+        self.initGame()
+    }
+    
+    func initGame() {
         self.fillCardsArrayInit()
         self.fillCardsValueInit()
         self.isCardsAvailableInit()
@@ -73,13 +76,91 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.playersDealerInit()
         self.playersInit()
         self.incrementNbDealer()
-        
     }
+    
+    func restartGame() {
+        //Reset all value locally
+        self.cardsArray = [String]()
+        self.cardsValue = [String]()
+        self.isCardsAvailable = [Bool]()
+        
+        // All available cards
+        self.cardsInDeck = [String]()
+        // cards already choosen
+        self.cardsChoosen = [String]()
+        
+        // Nb stack card (0,1 or 2)
+        self.cardsStack = [Int]()
+        
+        self.nameDealer = ""
+        self.namePlayer = ""
+        self.idDealer = -1
+        self.idPlayer = 1
+        self.nbPlayers = -1
+        
+        // Players
+        self.players = [String]()
+        self.playersDealer = [Int]()
+        
+        self.dealerCard = ""
+        self.gamerCard = ""
+        self.nbRoundGamer = 0
+        self.nbDealerWin = 0
+        
+        // Reset data in DB
+        self.resetDBToRestartGame()
+        
+        self.initGame()
+        
+        self.collectionCards.reloadData()
+    }
+    
+    func resetDBToRestartGame() {
+        // Reset value Players Table
+        let fetchRequestPlayers = NSFetchRequest(entityName: "Players")
+        fetchRequestPlayers.includesPropertyValues = false
+        // Get results
+        do {
+            if let fetchResultsPlayers = try managedContext.executeFetchRequest(fetchRequestPlayers) as? [Players] {
+                
+                for player in fetchResultsPlayers {
+                    player.nbCardsFound = 0
+                    player.nbDealer = 0
+                    player.nbGiven = 0
+                    player.nbReceived = 0
+                    try player.managedObjectContext?.save()
+                }
+            }
+        } catch let error as NSError  {
+            NSLog("Could not save \(error)")
+        }
+        
+        // Reset value Cards Table
+        let fetchRequestCards = NSFetchRequest(entityName: "Cards")
+        fetchRequestCards.includesPropertyValues = false
+        // Get results
+        do {
+            if let fetchResultsCards = try managedContext.executeFetchRequest(fetchRequestCards) as? [Cards] {
+                for card in fetchResultsCards {
+                    card.inDeck = true
+                    try card.managedObjectContext?.save()
+                }
+            }
+        } catch let error as NSError  {
+            NSLog("Could not save \(error)")
+        }
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError  {
+            NSLog("Could not save \(error)")
+        }
+    }
+    
     
     func getNbPlayer(){
         
         let fetchRequest = NSFetchRequest(entityName: "Stats")
-        
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let stats = results as! [Stats]
@@ -87,6 +168,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 nbPlayers = Int(stat.nbPlayers)
                 NSLog("NbPlayer = \(nbPlayers)")
             }
+            
         } catch {
             let fetchError = error as NSError
             NSLog(fetchError.debugDescription)
@@ -95,15 +177,15 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     func getDealerInit() {
-        self.idDealer = Int(arc4random_uniform(UInt32(nbPlayers - 1)))
+        self.idDealer = Int(arc4random_uniform(UInt32(nbPlayers)))
         
         let fetchRequest = NSFetchRequest(entityName: "Players")
         
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let players = results as! [Players]
-            self.nameDealer = players[idDealer].name
-            self.dealerName.text = "Dealer name : \(nameDealer)"
+            self.nameDealer = players[self.idDealer].name
+            self.dealerName.text = "Dealer name : \(self.nameDealer)"
             
         } catch {
             let fetchError = error as NSError
@@ -189,7 +271,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if (cardsStack[indexPath.row] == 0) {
             cell.imageCard.alpha = 0.3
-        } else if cardsStack[indexPath.row] == 3 {
+        } else if cardsStack[indexPath.row] == 4 {
             cell.imageCard.image = UIImage(named: "Back")
         }
         
@@ -317,7 +399,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             self.cardsValue += [cardName]
         }
-        
     }
     
     func cardInDeckInit() {
@@ -328,9 +409,20 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let cards = results as! [Cards]
             for card in cards {
-                let nameCard = "\(card.color) \(card.value)"
-                self.cardsInDeck += [nameCard]
-                //NSLog("Card in Deck = \(nameCard)")
+                if card.inDeck {
+                    let nameCard = "\(card.color) \(card.value)"
+                    self.cardsInDeck += [nameCard]
+                    //NSLog("Card in Deck = \(nameCard)")
+                } else {
+                    let nameCard = "\(card.color) \(card.value)"
+                    self.cardsChoosen += [nameCard]
+                    //NSLog("Card already chosen = \(nameCard)")
+                }
+
+                /*if card.value == "8" {
+                    let nameCard = "\(card.color) \(card.value)"
+                    self.cardsInDeck += [nameCard]
+                }*/
             }
         } catch {
             let fetchError = error as NSError
@@ -342,15 +434,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     func drawCard() {
         NSLog("\(__FUNCTION__) BEGIN")
         // Method to draw à card when the gamer click on à card
-        let index = arc4random_uniform(UInt32(self.cardsInDeck.count - 1))
+        let index = Int(arc4random_uniform(UInt32(self.cardsInDeck.count)))
         //NSLog("Index choosen = \(index)")
         
-        let drawedCard = self.cardsInDeck[Int(index)]
+        let drawedCard = self.cardsInDeck[index]
         //NSLog("Card choosen = \(drawedCard)")
-        
-        // Update Arrays
-        self.cardsInDeck.removeAtIndex(Int(index))
-        self.cardsChoosen += [drawedCard]
         
         self.dealerCard = drawedCard
         
@@ -411,6 +499,16 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    func getStringCardValue(card: String) -> String {
+        var value = ""
+        let cardArraySplit = card.characters.split{$0 == " "}.map(String.init)
+        
+        if !cardArraySplit.isEmpty {
+            value = cardArraySplit[cardArraySplit.count - 1]
+        }
+        return value
+    }
+    
     func matchingCardToNumber (value: String) -> Int {
         if value == "Ace" {
             // Case ACE
@@ -436,6 +534,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         var titleAlert = ""
         var descriptionAlert = ""
+        let buttonLabel = "Drinked"
         
         var sips = "sips"
         if nbSips == 1 {
@@ -452,8 +551,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if #available(iOS 8.0, *) {
             let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Drinked", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
-                self.resetCardAvailable()
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
                 
                 // TODO Update sips drinked locally and in DB
                 
@@ -529,11 +627,13 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         (nbDealerPotentiel, dealerPotentielArray) = self.determineDealerPotential()
         
-        let index = Int(arc4random_uniform(UInt32(nbDealerPotentiel - 1)))
+        let index = Int(arc4random_uniform(UInt32(nbDealerPotentiel)))
         
         self.idDealer = dealerPotentielArray[index]
         
-        }
+        // Set the number of wins to 0
+        self.nbDealerWin = 0
+    }
     
     func findPlayer() {
         idPlayer += 1
@@ -551,15 +651,25 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func endRound() {
-        if (self.nbDealerWin == 3) {
-            // The dealer must change
-            self.incrementNbDealer()
-            self.findDealer()
-            self.findPlayer()
-            self.namesSetter()
+        // MAJ Cards HMI
+        self.changeCardsHMI()
+        
+        // MAJ Cards Datas
+        self.updateCardsAfterRound()
+        
+        if self.cardsInDeck.isEmpty {
+            self.displayEndGameAlert()
         } else {
-            self.findPlayer()
-            self.namesSetter()
+            if (self.nbDealerWin == 3) {
+                // The dealer must change
+                self.incrementNbDealer()
+                self.findDealer()
+                self.findPlayer()
+                self.namesSetter()
+            } else {
+                self.findPlayer()
+                self.namesSetter()
+            }
         }
     }
     
@@ -573,8 +683,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         do {
             let results = try managedContext.executeFetchRequest(fetchRequest)
             let players = results as! [Players]
-            players[idDealer].nbDealer += 1
+            let player = players[idDealer]
+            player.nbDealer += 1
             
+            try player.managedObjectContext?.save()
+            // Save
             try managedContext.save()
         } catch {
             let fetchError = error as NSError
@@ -582,12 +695,94 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    func updateCardsAfterRound() {
+        // Find index of card drawed at the end of the round
+        let index = self.convertCardToNumber(self.dealerCard) - 1
+        
+        // Update cards stack
+        self.cardsStack[index] += 1
+        
+        // Update cards array
+        for i in 0...(self.cardsInDeck.count - 1) {
+            if self.cardsInDeck[i] == self.dealerCard {
+                // Remove the card in deck array
+                self.cardsInDeck.removeAtIndex(i)
+                
+                // Add the card in cards choosen array
+                self.cardsChoosen += [self.dealerCard]
+                
+                // Exit of the loop
+                break
+            }
+        }
+        
+        // Update cards in DB
+        let fetchRequest = NSFetchRequest(entityName: "Cards")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let cards = results as! [Cards]
+            for card in cards {
+                let nameCard = "\(card.color) \(card.value)"
+                if nameCard == self.dealerCard {
+                    card.inDeck = false
+                    try card.managedObjectContext?.save()
+                    break
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            NSLog(fetchError.debugDescription)
+        }
+        
+    }
+    
+    func changeCardsHMI() {
+        self.resetCardAvailable()
+        
+        // Find index of card drawed at the end of the round
+        let index = convertCardToNumber(self.dealerCard) - 1
+        
+        // Change card in field
+        self.cardsArray[index] = self.dealerCard
+        self.cardsValue[index] = self.getStringCardValue(self.dealerCard)
+        
+    }
+    
+    func displayEndGameAlert() {
+        let titleAlert = "Finish !"
+        let descriptionAlert = "The game is over !"
+        let buttonLabel = "OK"
+        
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+                
+                // Change controller
+                NSLog("GVC - The game is finished")
+                
+                // Restart game
+                self.restartGame()
+                
+                // Go to statsController
+                self.performSegueWithIdentifier("finishedGameSegue", sender: nil)
+                
+            }))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // TODO
+        }
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "finishedGameSegue" {
+            // TODO pass data to finished game page
+            
+        }
     }
     
 }
