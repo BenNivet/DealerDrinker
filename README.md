@@ -1,2 +1,2 @@
 # DealerDrinker
-Fuck the dealer game card in SWIFT
+Game card in SWIFT
