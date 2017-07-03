@@ -391,8 +391,8 @@
 			children = (
 				1955EA0F1C94C84000A5B20B /* Old */,
 				1955E90A1C8F6A1000A5B20B /* HomeViewController.swift */,
-				1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */,
 				1955EA031C945CD300A5B20B /* GameViewController.swift */,
+				1955EA0B1C94C05600A5B20B /* PlayersViewController.swift */,
 				1955EA161C97588F00A5B20B /* StatsViewController.swift */,
 			);
 			name = Controllers;
@@ -983,7 +983,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WK7T3Z2QPN;
 				ENABLE_TESTABILITY = YES;
@@ -993,6 +992,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Nivet.DealerDrinker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1000,7 +1000,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WK7T3Z2QPN;
 				ENABLE_TESTABILITY = YES;
@@ -1010,6 +1009,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Nivet.DealerDrinker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -28,60 +28,34 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eT-Ky-Nnn">
                                 <rect key="frame" x="0.0" y="42" width="667" height="290"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YzL-an-FSf">
-                                        <rect key="frame" x="234" y="100" width="200" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="1Wc-Od-CGe"/>
-                                            <constraint firstAttribute="width" constant="200" id="mMK-ET-34C"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <state key="normal" title="Start Game" backgroundImage="Felt.png">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="QJq-OO-MMT" kind="show" identifier="nbPlayersSegue" id="ed5-G2-yfe"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kC9-Ib-Urr">
-                                        <rect key="frame" x="234" y="240" width="200" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Lge-tz-oKL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <state key="normal" title="Settings" backgroundImage="Felt.png">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQP-Ab-03c">
-                                        <rect key="frame" x="234" y="170" width="200" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="DDq-bH-yx6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <state key="normal" title="Back To Game" backgroundImage="Felt.png">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEALER DRINKER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zh0-QD-kZL">
-                                        <rect key="frame" x="20" y="20" width="627" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="30"/>
+                                        <rect key="frame" x="20" y="20" width="627" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="40"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YzL-an-FSf" userLabel="New Game Button">
+                                        <rect key="frame" x="208.5" y="117.5" width="250" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="Kid-yk-IsA"/>
+                                            <constraint firstAttribute="width" constant="250" id="ejp-j5-bzu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <state key="normal" title="New Game" backgroundImage="Felt.png">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wDW-Ed-ROc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="YzL-an-FSf" firstAttribute="trailing" secondItem="pQP-Ab-03c" secondAttribute="trailing" id="GUI-tz-Z5q"/>
-                                    <constraint firstItem="YzL-an-FSf" firstAttribute="leading" secondItem="pQP-Ab-03c" secondAttribute="leading" id="Gi1-4r-qEc"/>
+                                    <constraint firstItem="YzL-an-FSf" firstAttribute="centerX" secondItem="3eT-Ky-Nnn" secondAttribute="centerX" id="9jG-zh-7Ur"/>
                                     <constraint firstItem="zh0-QD-kZL" firstAttribute="leading" secondItem="3eT-Ky-Nnn" secondAttribute="leading" constant="20" id="Mzw-04-sd5"/>
-                                    <constraint firstItem="pQP-Ab-03c" firstAttribute="top" secondItem="YzL-an-FSf" secondAttribute="bottom" constant="40" id="NST-Yn-5wI"/>
-                                    <constraint firstItem="zh0-QD-kZL" firstAttribute="centerX" secondItem="YzL-an-FSf" secondAttribute="centerX" id="Ouc-XR-noB"/>
-                                    <constraint firstItem="YzL-an-FSf" firstAttribute="top" secondItem="zh0-QD-kZL" secondAttribute="bottom" constant="44" id="Rri-zK-kPg"/>
-                                    <constraint firstItem="pQP-Ab-03c" firstAttribute="trailing" secondItem="kC9-Ib-Urr" secondAttribute="trailing" id="VCr-0a-8x6"/>
-                                    <constraint firstItem="kC9-Ib-Urr" firstAttribute="top" secondItem="pQP-Ab-03c" secondAttribute="bottom" constant="40" id="jJb-Tw-PWd"/>
                                     <constraint firstItem="zh0-QD-kZL" firstAttribute="centerX" secondItem="3eT-Ky-Nnn" secondAttribute="centerX" id="lZd-P2-SlF"/>
                                     <constraint firstAttribute="height" constant="290" id="pCi-bR-WLk"/>
-                                    <constraint firstItem="pQP-Ab-03c" firstAttribute="leading" secondItem="kC9-Ib-Urr" secondAttribute="leading" id="pzd-ZR-1u3"/>
                                     <constraint firstItem="zh0-QD-kZL" firstAttribute="top" secondItem="3eT-Ky-Nnn" secondAttribute="top" constant="20" id="wwS-WC-goE"/>
+                                    <constraint firstItem="YzL-an-FSf" firstAttribute="centerY" secondItem="3eT-Ky-Nnn" secondAttribute="centerY" id="yVb-l1-LgD"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -89,21 +63,22 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="3eT-Ky-Nnn" secondAttribute="trailing" id="370-Zp-xcs"/>
                             <constraint firstItem="3eT-Ky-Nnn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5mr-H3-dVM"/>
+                            <constraint firstItem="3eT-Ky-Nnn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8HZ-J2-1dZ"/>
                             <constraint firstItem="0W3-J2-BRk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PIS-6J-5Jr"/>
+                            <constraint firstItem="3eT-Ky-Nnn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VUE-dX-qgF"/>
                             <constraint firstItem="0W3-J2-BRk" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="eNS-IM-fii"/>
                             <constraint firstItem="3eT-Ky-Nnn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vSN-2w-n7w"/>
                             <constraint firstItem="0W3-J2-BRk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="x5g-db-ELd"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="button2" destination="pQP-Ab-03c" id="kRO-NL-ZCG"/>
-                        <outlet property="settingsButton" destination="kC9-Ib-Urr" id="KvA-q2-8HF"/>
                         <outlet property="startButton" destination="YzL-an-FSf" id="OAm-SQ-yel"/>
+                        <segue destination="5Z6-uA-9VG" kind="show" identifier="goToGameSegue" id="QTl-EC-xQP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379.5" y="290"/>
+            <point key="canvasLocation" x="379.16041979010498" y="288.80000000000001"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tye-wl-QU1">
@@ -128,7 +103,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="backButton.png"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="custom" customClass="DismissSegue" id="mzc-MS-Vse"/>
+                                    <action selector="backToHome:" destination="5Z6-uA-9VG" eventType="touchUpInside" id="FUn-6i-hLh"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sbg-x9-qrt">
@@ -148,15 +123,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="82" height="121"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Back.png" translatesAutoresizingMaskIntoConstraints="NO" id="PK0-Im-Yat">
-                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="110"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back.png" translatesAutoresizingMaskIntoConstraints="NO" id="PK0-Im-Yat">
+                                                    <rect key="frame" x="0.0" y="0.0" width="82" height="121"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="PK0-Im-Yat" secondAttribute="bottom" id="6Wx-Ya-Q0Q"/>
+                                            <constraint firstItem="PK0-Im-Yat" firstAttribute="top" secondItem="MDS-R9-TCp" secondAttribute="top" id="9A5-JS-N1O"/>
+                                            <constraint firstAttribute="trailing" secondItem="PK0-Im-Yat" secondAttribute="trailing" id="MvA-f7-qHy"/>
                                             <constraint firstItem="PK0-Im-Yat" firstAttribute="top" secondItem="MDS-R9-TCp" secondAttribute="top" id="Rtc-LF-9x0"/>
                                             <constraint firstItem="PK0-Im-Yat" firstAttribute="leading" secondItem="MDS-R9-TCp" secondAttribute="leading" id="WvR-p9-ht4"/>
+                                            <constraint firstItem="PK0-Im-Yat" firstAttribute="leading" secondItem="MDS-R9-TCp" secondAttribute="leading" id="kWO-TY-9LQ"/>
                                             <constraint firstAttribute="bottom" secondItem="PK0-Im-Yat" secondAttribute="bottom" id="vW9-qy-802"/>
                                             <constraint firstAttribute="trailing" secondItem="PK0-Im-Yat" secondAttribute="trailing" id="w9b-3n-enR"/>
                                         </constraints>
@@ -218,11 +197,12 @@
                         <outlet property="dealerName" destination="NOe-6d-vro" id="Rff-5T-pzz"/>
                         <outlet property="playerName" destination="L9r-KM-j4u" id="M5C-vD-q5Y"/>
                         <segue destination="61E-rK-djm" kind="show" identifier="finishedGameSegue" id="vmk-ic-4mj"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="backToHomeFromGameSegue" customClass="DismissSegue" id="vgs-l8-gsl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIU-qh-2ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="290"/>
+            <point key="canvasLocation" x="1116.5" y="288.5"/>
         </scene>
         <!--Players View Controller-->
         <scene sceneID="rYW-hN-kgJ">
@@ -246,9 +226,6 @@
                                     <constraint firstAttribute="height" constant="50" id="C5w-a6-wVw"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="backButton.png"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="custom" identifier="cancelPlayersSegue" customClass="DismissSegue" id="hiC-X5-1oy"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yng-cs-VbZ">
                                 <rect key="frame" x="40" y="145.5" width="100" height="24"/>
@@ -324,12 +301,11 @@
                         <outlet property="labelPlayer" destination="yng-cs-VbZ" id="8dV-VO-81Y"/>
                         <outlet property="submitPlayer" destination="A3d-As-Nbn" id="XNr-iK-mWX"/>
                         <outlet property="textFieldPlayer" destination="jk4-WS-KQk" id="25P-uH-qPi"/>
-                        <segue destination="5Z6-uA-9VG" kind="show" identifier="gameSegue" id="jWj-YE-4L1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="26s-rn-am7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="290"/>
+            <point key="canvasLocation" x="1107" y="-751"/>
         </scene>
         <!--Stats View Controller-->
         <scene sceneID="cEi-ms-j0w">
@@ -371,7 +347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIO-jZ-T2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2494" y="290"/>
+            <point key="canvasLocation" x="1828" y="289"/>
         </scene>
     </scenes>
     <resources>
@@ -382,7 +358,6 @@
         <image name="backButton.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hiC-X5-1oy"/>
-        <segue reference="jWj-YE-4L1"/>
+        <segue reference="QTl-EC-xQP"/>
     </inferredMetricsTieBreakers>
 </document>

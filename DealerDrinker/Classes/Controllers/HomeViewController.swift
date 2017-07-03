@@ -7,13 +7,10 @@
 //
 
 import UIKit
-import CoreData
 
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,23 +33,20 @@ class HomeViewController: UIViewController {
         self.startButton.layer.borderColor = UIColor.black.cgColor
         self.startButton.clipsToBounds = true;
         
-        self.button2.layer.cornerRadius = 15
-        self.button2.layer.borderWidth = 1
-        self.button2.layer.borderColor = UIColor.black.cgColor
-        self.button2.clipsToBounds = true;
-        
-        self.settingsButton.layer.cornerRadius = 15
-        self.settingsButton.layer.borderWidth = 1
-        self.settingsButton.layer.borderColor = UIColor.black.cgColor
-        self.settingsButton.clipsToBounds = true
-        
-        NSLog("\(#function) END")
-
-        
+        NSLog("\(#function) END")        
+    }
+    
+    @IBAction func startNewGame(_ sender: Any) {
+        performSegue(withIdentifier: goToGameSegue, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Segue
+        // Segues
+        if segue.identifier == goToGameSegue {
+            if segue.destination is GameViewController{
+                // ???
+            }
+        }
     }
 
 }

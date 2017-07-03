@@ -44,7 +44,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // Value of the round (0 when the gamer didn't selected card, and 1 after the first choice)
     var nbRoundGamer : Int = 0
     var nbDealerWin : Int = 0
-    
+        
     var managedContext = NSManagedObjectContext()
     
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         managedContext = appDelegate.managedObjectContext
         
         let defaults = UserDefaults.standard
-        defaults.set(1, forKey: "isGaming")
+        defaults.set(1, forKey: isGamingsettings)
         
         self.initGame()
     }
@@ -76,6 +76,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.playersDealerInit()
         self.playersInit()
         self.incrementNbDealer()
+        
+        self.collectionCards.reloadData()
+
     }
     
     func restartGame() {
@@ -258,7 +261,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - CollectionView Protocol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 13 Cards differents => 13 Cells
-        return 13
+        return cardsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -311,7 +314,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.nbRoundGamer = 0
 
                 // Alert
-                self.displayAlert(false, nbSips: 5)
+                self.displaySipsAlert(false, nbSips: 5)
                 
             } else if compareResult == -1 {
                 self.disableCardSecondRound(gamerCardNumber - 1, way: false)
@@ -338,7 +341,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.nbDealerWin = 0
         
                 // Alert
-                self.displayAlert(false, nbSips: 3)
+                self.displaySipsAlert(false, nbSips: 3)
                 
             } else {
                 // TODO The dealer win
@@ -346,7 +349,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let nbSips = abs(dealerCardNumber - gamerCardNumber)
 
                 // Alert
-                self.displayAlert(true, nbSips: nbSips)
+                self.displaySipsAlert(true, nbSips: nbSips)
 
             }
         }
@@ -356,16 +359,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
         let widthScreen = UIScreen.main.bounds.size.width
-        NSLog("WidthScreen = \(widthScreen)")
         // Screen Size
         if (widthScreen == 736){
-            //NSLog("Change size cell : iPhone 6+")
             return CGSize(width: 92, height: 136)
         } else if (widthScreen == 667){
-            //NSLog("Change size cell : iPhone 6")
             return CGSize(width: 82, height: 121)
         }else {
-            //NSLog("Change size cell : iPhone 4 ou 5")
             return CGSize(width: 68, height: 100)
         }
         
@@ -548,7 +547,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    func displayAlert (_ isDealerWin : Bool, nbSips : Int) {
+    func displaySipsAlert (_ isDealerWin : Bool, nbSips : Int) {
         NSLog("\(#function) BEGIN")
         
         var titleAlert = ""
@@ -768,6 +767,29 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    func displayBackAlert() {
+        let titleAlert = "Exit ?"
+        let buttonLabel = "OK"
+        
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: titleAlert, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default,handler: { (action: UIAlertAction!) in
+                
+                // Change controller
+                NSLog("GVC - Back to home")
+                
+                // Go to Home Controller
+                self.performSegue(withIdentifier: backToHomeFromGameSegue, sender: nil)
+                
+            }))
+            
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            // Go to Home Controller
+            self.performSegue(withIdentifier: backToHomeFromGameSegue, sender: nil)
+        }
+    }
+    
     func displayEndGameAlert() {
         let titleAlert = "Finish !"
         let descriptionAlert = "The game is over !"
@@ -784,21 +806,26 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.restartGame()
                 
                 // Go to statsController
-                self.performSegue(withIdentifier: "finishedGameSegue", sender: nil)
+                self.performSegue(withIdentifier: finishedGameSegue, sender: nil)
                 
             }))
             
             self.present(alertController, animated: true, completion: nil)
         } else {
-            // TODO
+            // Go to statsController
+            self.performSegue(withIdentifier: finishedGameSegue, sender: nil)
         }
     }
     
     // MARK: - Navigation
+    @IBAction func backToHome(_ sender: Any) {
+        displayBackAlert()
+    }
+    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "finishedGameSegue" {
+        if segue.identifier == finishedGameSegue {
             // TODO pass data to finished game page
             
         }

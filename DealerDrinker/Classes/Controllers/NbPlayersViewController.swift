@@ -32,17 +32,17 @@ class NbPlayersViewController: UIViewController, UITextFieldDelegate {
         self.textField.delegate = self
         
         let defaults = UserDefaults.standard
-        defaults.set(0, forKey: "isGaming")
+        defaults.set(0, forKey: isGamingsettings)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard
-        if let isGaming:Int = defaults.integer(forKey: "isGaming") {
+        if let isGaming:Int = defaults.integer(forKey: isGamingsettings) {
             if isGaming == 1 {
                 performSegue(withIdentifier: "cancelNbPlayersSegue", sender: nil)
             }
         } else {
-            defaults.set(0, forKey: "isGaming")
+            defaults.set(0, forKey: isGamingsettings)
         }
     }
 

@@ -28,7 +28,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         self.view.addGestureRecognizer(tap)
         
         let defaults = UserDefaults.standard
-        defaults.set(0, forKey: "isGaming")
+        defaults.set(0, forKey: isGamingsettings)
         
         textFieldPlayer.delegate = self
         
@@ -44,7 +44,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard
         
-        if let isGaming : Int = defaults.integer(forKey: "isGaming") {
+        if let isGaming : Int = defaults.integer(forKey: isGamingsettings) {
             if isGaming == 1 {
                 performSegue(withIdentifier: "cancelPlayersSegue", sender: nil)
             }

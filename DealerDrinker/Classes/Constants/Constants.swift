@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+let isGamingsettings        = "isGaming";
+let goToGameSegue           = "goToGameSegue"
+let backToHomeFromGameSegue = "backToHomeFromGameSegue"
+let finishedGameSegue       = "finishedGameSegue"
