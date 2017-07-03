@@ -53,12 +53,12 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionCards.delegate = self
         self.collectionCards.dataSource = self
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         managedContext = appDelegate.managedObjectContext
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(1, forKey: "isGaming")
+        let defaults = UserDefaults.standard
+        defaults.set(1, forKey: "isGaming")
         
         self.initGame()
     }
@@ -117,11 +117,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func resetDBToRestartGame() {
         // Reset value Players Table
-        let fetchRequestPlayers = NSFetchRequest(entityName: "Players")
+        let fetchRequestPlayers = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         fetchRequestPlayers.includesPropertyValues = false
         // Get results
         do {
-            if let fetchResultsPlayers = try managedContext.executeFetchRequest(fetchRequestPlayers) as? [Players] {
+            if let fetchResultsPlayers = try managedContext.fetch(fetchRequestPlayers) as? [Players] {
                 
                 for player in fetchResultsPlayers {
                     player.nbCardsFound = 0
@@ -136,11 +136,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         // Reset value Cards Table
-        let fetchRequestCards = NSFetchRequest(entityName: "Cards")
+        let fetchRequestCards = NSFetchRequest<NSFetchRequestResult>(entityName: "Cards")
         fetchRequestCards.includesPropertyValues = false
         // Get results
         do {
-            if let fetchResultsCards = try managedContext.executeFetchRequest(fetchRequestCards) as? [Cards] {
+            if let fetchResultsCards = try managedContext.fetch(fetchRequestCards) as? [Cards] {
                 for card in fetchResultsCards {
                     card.inDeck = true
                     try card.managedObjectContext?.save()
@@ -160,9 +160,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func getNbPlayer(){
         
-        let fetchRequest = NSFetchRequest(entityName: "Stats")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats")
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let stats = results as! [Stats]
             for stat in stats{
                 nbPlayers = Int(stat.nbPlayers)
@@ -179,10 +179,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     func getDealerInit() {
         self.idDealer = Int(arc4random_uniform(UInt32(nbPlayers)))
         
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let players = results as! [Players]
             self.nameDealer = players[self.idDealer].name
             self.dealerName.text = "Dealer name : \(self.nameDealer)"
@@ -202,11 +202,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func playerNameSetter(idPlayer : Int){
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+    func playerNameSetter(_ idPlayer : Int){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let players = results as! [Players]
             self.namePlayer = players[idPlayer].name
             self.playerName.text = "Player name : \(namePlayer)"
@@ -218,10 +218,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func namesSetter(){
 
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let players = results as! [Players]
             
             // Set namePlayer
@@ -256,14 +256,14 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     // MARK: - CollectionView Protocol
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 13 Cards differents => 13 Cells
         return 13
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell: CardCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("cardCell", forIndexPath: indexPath) as! CardCollectionViewCell
+        let cell: CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCollectionViewCell
         
         cell.imageCard.image = UIImage(named: cardsArray[indexPath.row])
         
@@ -283,8 +283,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        NSLog("\(__FUNCTION__) BEGIN")
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        NSLog("\(#function) BEGIN")
         NSLog("GVC - Card cell #\(indexPath.row) selected")
         
         if (nbRoundGamer == 0) {
@@ -350,23 +350,23 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
             }
         }
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
-        let widthScreen = UIScreen.mainScreen().bounds.size.width
+        let widthScreen = UIScreen.main.bounds.size.width
         NSLog("WidthScreen = \(widthScreen)")
         // Screen Size
         if (widthScreen == 736){
-            NSLog("Change size cell : iPhone 6+")
-            return CGSizeMake(92, 136)
+            //NSLog("Change size cell : iPhone 6+")
+            return CGSize(width: 92, height: 136)
         } else if (widthScreen == 667){
             //NSLog("Change size cell : iPhone 6")
-            return CGSizeMake(82, 121)
+            return CGSize(width: 82, height: 121)
         }else {
-            NSLog("Change size cell : iPhone 4 ou 5")
-            return CGSizeMake(68, 100)
+            //NSLog("Change size cell : iPhone 4 ou 5")
+            return CGSize(width: 68, height: 100)
         }
         
     }
@@ -421,11 +421,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func cardInDeckInit() {
-        NSLog("\(__FUNCTION__) BEGIN")
-        let fetchRequest = NSFetchRequest(entityName: "Cards")
+        NSLog("\(#function) BEGIN")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Cards")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let cards = results as! [Cards]
             for card in cards {
                 if card.inDeck {
@@ -447,11 +447,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             let fetchError = error as NSError
             NSLog(fetchError.debugDescription)
         }
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
     }
     
     func drawCard() {
-        NSLog("\(__FUNCTION__) BEGIN")
+        NSLog("\(#function) BEGIN")
         // Method to draw à card when the gamer click on à card
         let index = Int(arc4random_uniform(UInt32(self.cardsInDeck.count)))
         //NSLog("Index choosen = \(index)")
@@ -461,11 +461,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.dealerCard = drawedCard
         
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
         
     }
     
-    func compareCards (dealerCardNumber : Int, gamerCardNumber : Int) -> Int {
+    func compareCards (_ dealerCardNumber : Int, gamerCardNumber : Int) -> Int {
         // Return 0 if equal, -1 if it's minus, +1 if it's plus
         
         if (gamerCardNumber < dealerCardNumber){
@@ -477,7 +477,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func disableCardSecondRound(index: Int, way: Bool) {
+    func disableCardSecondRound(_ index: Int, way: Bool) {
         // Disable card from index, way = false correspond to down and way = true correspond to up
         for i in 0...(isCardsAvailable.count - 1) {
             if way {
@@ -507,7 +507,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     
-    func convertCardToNumber (card: String) -> Int {
+    func convertCardToNumber (_ card: String) -> Int {
         
         let cardArraySplit = card.characters.split{$0 == " "}.map(String.init)
         
@@ -518,7 +518,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func getStringCardValue(card: String) -> String {
+    func getStringCardValue(_ card: String) -> String {
         var value = ""
         let cardArraySplit = card.characters.split{$0 == " "}.map(String.init)
         
@@ -528,7 +528,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         return value
     }
     
-    func matchingCardToNumber (value: String) -> Int {
+    func matchingCardToNumber (_ value: String) -> Int {
         if value == "Ace" {
             // Case ACE
             return 1
@@ -548,8 +548,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    func displayAlert (isDealerWin : Bool, nbSips : Int) {
-        NSLog("\(__FUNCTION__) BEGIN")
+    func displayAlert (_ isDealerWin : Bool, nbSips : Int) {
+        NSLog("\(#function) BEGIN")
         
         var titleAlert = ""
         var descriptionAlert = ""
@@ -569,22 +569,22 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default,handler: { (action: UIAlertAction!) in
                 
                 // TODO Update sips drinked locally and in DB
                 
                 self.endRound()
             }))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         } else {
             // TODO Add Label
             // reset card available
             self.resetCardAvailable()
         }
         
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
     }
     
     func playersDealerInit() {
@@ -598,10 +598,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func playersInit() {
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let players = results as! [Players]
             for player in players {
                 self.players += [player.name]
@@ -697,10 +697,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.playersDealer[idDealer] += 1
         
         // Update the number of the deal in DB
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let players = results as! [Players]
             let player = players[idDealer]
             player.nbDealer += 1
@@ -725,7 +725,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         for i in 0...(self.cardsInDeck.count - 1) {
             if self.cardsInDeck[i] == self.dealerCard {
                 // Remove the card in deck array
-                self.cardsInDeck.removeAtIndex(i)
+                self.cardsInDeck.remove(at: i)
                 
                 // Add the card in cards choosen array
                 self.cardsChoosen += [self.dealerCard]
@@ -736,10 +736,10 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         // Update cards in DB
-        let fetchRequest = NSFetchRequest(entityName: "Cards")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Cards")
         
         do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             let cards = results as! [Cards]
             for card in cards {
                 let nameCard = "\(card.color) \(card.value)"
@@ -774,8 +774,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let buttonLabel = "OK"
         
         if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default,handler: { (action: UIAlertAction!) in
                 
                 // Change controller
                 NSLog("GVC - The game is finished")
@@ -784,11 +784,11 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.restartGame()
                 
                 // Go to statsController
-                self.performSegueWithIdentifier("finishedGameSegue", sender: nil)
+                self.performSegue(withIdentifier: "finishedGameSegue", sender: nil)
                 
             }))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         } else {
             // TODO
         }
@@ -797,7 +797,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "finishedGameSegue" {
             // TODO pass data to finished game page
             

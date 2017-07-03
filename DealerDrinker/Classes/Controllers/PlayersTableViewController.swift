@@ -31,20 +31,20 @@ class PlayersTableViewController: UITableViewController, UITextFieldDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("PTVC - numberOfRowsInSection - nbPlayer = \(nbPlayers)")
         return self.nbPlayers
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         NSLog("PTVC - cellForRowAtIndexPath - row = \(indexPath.row)")
 
-        let cellPlayer = tableView.dequeueReusableCellWithIdentifier("player", forIndexPath: indexPath) as? PlayerTableViewCell
+        let cellPlayer = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as? PlayerTableViewCell
         
         // Set attributes
         cellPlayer?.labelPlayer.text = "Player \(indexPath.row + 1)"
@@ -55,31 +55,31 @@ class PlayersTableViewController: UITableViewController, UITextFieldDelegate {
 
     
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         NSLog("PTVC - textFieldShouldReturn")
         
         textField.resignFirstResponder()
         
         if indexTable < nbPlayers - 1 {
-            let indexPath = NSIndexPath(forRow: self.indexTable + 1, inSection: 0)
+            let indexPath = IndexPath(row: self.indexTable + 1, section: 0)
 
-            let cellPlayer = tableView.dequeueReusableCellWithIdentifier("player", forIndexPath: indexPath) as? PlayerTableViewCell
+            let cellPlayer = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as? PlayerTableViewCell
             NSLog("PTVC - textFieldShouldReturn - row = \(indexPath.row)")
 
             cellPlayer?.textFieldPlayer.becomeFirstResponder()
         } else if indexTable == nbPlayers - 1 {
-            performSegueWithIdentifier("gameSegue", sender: nil)
+            performSegue(withIdentifier: "gameSegue", sender: nil)
         }
         return true
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          NSLog("PTVC - didSelectRowAtIndexPath - row = \(indexPath.row)")
-        let cellPlayer = tableView.dequeueReusableCellWithIdentifier("player", forIndexPath: indexPath) as? PlayerTableViewCell
+        let cellPlayer = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath) as? PlayerTableViewCell
 
         cellPlayer?.textFieldPlayer.delegate = self
         self.indexTable = indexPath.row
@@ -116,7 +116,7 @@ class PlayersTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "cancelPlayersSegue") {
             view.endEditing(true)
         } else if (segue.identifier == "gameSegue") {

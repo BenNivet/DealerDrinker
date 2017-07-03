@@ -18,31 +18,31 @@ class NbPlayersViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.Default
-        toolBar.translucent = true
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "donePressed")
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Bordered, target: self, action: "cancelPressed")
-        cancelButton.tintColor = UIColor.redColor()
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NbPlayersViewController.donePressed))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.bordered, target: self, action: #selector(NbPlayersViewController.cancelPressed))
+        cancelButton.tintColor = UIColor.red
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.userInteractionEnabled = true
+        toolBar.isUserInteractionEnabled = true
         toolBar.sizeToFit()
         
         self.textField.inputAccessoryView = toolBar
         self.textField.delegate = self
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(0, forKey: "isGaming")
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "isGaming")
     }
     
-    override func viewDidAppear(animated: Bool) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let isGaming:Int = defaults.integerForKey("isGaming") {
+    override func viewDidAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        if let isGaming:Int = defaults.integer(forKey: "isGaming") {
             if isGaming == 1 {
-                performSegueWithIdentifier("cancelNbPlayersSegue", sender: nil)
+                performSegue(withIdentifier: "cancelNbPlayersSegue", sender: nil)
             }
         } else {
-            defaults.setInteger(0, forKey: "isGaming")
+            defaults.set(0, forKey: "isGaming")
         }
     }
 
@@ -55,22 +55,22 @@ class NbPlayersViewController: UIViewController, UITextFieldDelegate {
         NSLog("NbPVC - donePressed")
         view.endEditing(true)
         nbPlayers =  Int(textField.text!)!
-        performSegueWithIdentifier("fillPlayersSegue", sender: nil)
+        performSegue(withIdentifier: "fillPlayersSegue", sender: nil)
     }
     
     func cancelPressed(){
         NSLog("NbPVC - cancelPressed")
         view.endEditing(true)
-        performSegueWithIdentifier("cancelNbPlayersSegue", sender: nil)
+        performSegue(withIdentifier: "cancelNbPlayersSegue", sender: nil)
     }
     
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "fillPlayersSegue") {
-            let destinationNavigationController = segue.destinationViewController as? UINavigationController
+            let destinationNavigationController = segue.destination as? UINavigationController
             let playerController = destinationNavigationController!.topViewController as? PlayersTableViewController
             
             NSLog("NbPlayers = \(nbPlayers)")

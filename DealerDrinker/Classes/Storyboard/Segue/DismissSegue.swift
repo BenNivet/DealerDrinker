@@ -12,14 +12,14 @@ import UIKit
 @objc(DismissSegue) class DismissSegue: UIStoryboardSegue {
    
     override func perform() {
-        NSLog("\(__FUNCTION__) BEGIN")
+        NSLog("\(#function) BEGIN")
         
-        if let controller = sourceViewController as? UIViewController {
+        if let controller = source as? UIViewController {
             NSLog("SEG - perform : (DismissSegue) Trying to display destination by dismissing sending controller")
-            controller.dismissViewControllerAnimated(true, completion: nil)
+            controller.dismiss(animated: true, completion: nil)
         }
         
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
     }
     
     

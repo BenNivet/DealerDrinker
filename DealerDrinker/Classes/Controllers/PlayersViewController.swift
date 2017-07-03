@@ -24,29 +24,29 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: "dismissKeyboard")
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(PlayersViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(0, forKey: "isGaming")
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "isGaming")
         
         textFieldPlayer.delegate = self
         
         labelPlayer.text = "Player \(nbPlayer + 1)"
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         managedContext = appDelegate.managedObjectContext
         
         emptyPlayersTables()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        let defaults = NSUserDefaults.standardUserDefaults()
+    override func viewWillAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
         
-        if let isGaming: Int = defaults.integerForKey("isGaming") {
+        if let isGaming: Int = defaults.integer(forKey: "isGaming") {
             if isGaming == 1 {
-                performSegueWithIdentifier("cancelPlayersSegue", sender: nil)
+                performSegue(withIdentifier: "cancelPlayersSegue", sender: nil)
             }
         }
     }
@@ -59,11 +59,11 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    @IBAction func addPlayer(sender: AnyObject) {
+    @IBAction func addPlayer(_ sender: AnyObject) {
         updateData()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         updateData()
         return true
     }
@@ -72,7 +72,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         if textFieldPlayer.text != "" {
             NSLog("PVC - Add player")
             
-            let newPlayer: Players = NSEntityDescription.insertNewObjectForEntityForName("Players", inManagedObjectContext: managedContext) as! Players
+            let newPlayer: Players = NSEntityDescription.insertNewObject(forEntityName: "Players", into: managedContext) as! Players
             newPlayer.name = textFieldPlayer.text!
             
             do {
@@ -90,11 +90,11 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func submitAction(sender: AnyObject) {
+    @IBAction func submitAction(_ sender: AnyObject) {
         NSLog("PVC - Submit player")
 
         if nbPlayer >= 2 {
-            let newNbPlayer: Stats = NSEntityDescription.insertNewObjectForEntityForName("Stats", inManagedObjectContext: managedContext) as! Stats
+            let newNbPlayer: Stats = NSEntityDescription.insertNewObject(forEntityName: "Stats", into: managedContext) as! Stats
             newNbPlayer.nbPlayers = nbPlayer
             
             do {
@@ -104,7 +104,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
                 print("Could not save \(error), \(error.userInfo)")
             }
 
-            performSegueWithIdentifier("gameSegue", sender: nil)
+            performSegue(withIdentifier: "gameSegue", sender: nil)
         } else {
             NSLog("Limit min players incorrect")
             // Alert
@@ -116,15 +116,15 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         let context = self.managedContext
         
         // Empty Players Table
-        let fetchRequest = NSFetchRequest(entityName: "Players")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Players")
         fetchRequest.includesPropertyValues = false
         
         // Get results
         
         do {
-            if let fetchResults = try context.executeFetchRequest(fetchRequest) as? [Players] {
+            if let fetchResults = try context.fetch(fetchRequest) as? [Players] {
                 for result in fetchResults {
-                    context.deleteObject(result)
+                    context.delete(result)
                 }
                 try context.save()
             }
@@ -134,14 +134,14 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Empty Stats Table
-        let fetchRequestStats = NSFetchRequest(entityName: "Stats")
+        let fetchRequestStats = NSFetchRequest<NSFetchRequestResult>(entityName: "Stats")
         fetchRequestStats.includesPropertyValues = false
         
         // Get results
         do {
-            if let fetchResultsStats = try context.executeFetchRequest(fetchRequestStats) as? [Stats] {
+            if let fetchResultsStats = try context.fetch(fetchRequestStats) as? [Stats] {
                 for result in fetchResultsStats {
-                    context.deleteObject(result)
+                    context.delete(result)
                 }
                 try context.save()
             }
@@ -157,10 +157,10 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
         let buttonLabel = "OK"
         
         if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.Default,handler: nil))
+            let alertController = UIAlertController(title: titleAlert, message: descriptionAlert, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertActionStyle.default,handler: nil))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         } else {
             // TODO
         }
@@ -169,7 +169,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         NSLog("PVC - prepareForSegue - segue = \(segue.identifier)")
         if segue.identifier == "gameSegue" {
             

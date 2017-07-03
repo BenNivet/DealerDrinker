@@ -28,30 +28,30 @@ class HomeViewController: UIViewController {
     }
 
     func updateHMI() {
-        NSLog("\(__FUNCTION__) BEGIN")
+        NSLog("\(#function) BEGIN")
         
         // Set buttons style
         self.startButton.layer.cornerRadius = 15
         self.startButton.layer.borderWidth = 1
-        self.startButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.startButton.layer.borderColor = UIColor.black.cgColor
         self.startButton.clipsToBounds = true;
         
         self.button2.layer.cornerRadius = 15
         self.button2.layer.borderWidth = 1
-        self.button2.layer.borderColor = UIColor.blackColor().CGColor
+        self.button2.layer.borderColor = UIColor.black.cgColor
         self.button2.clipsToBounds = true;
         
         self.settingsButton.layer.cornerRadius = 15
         self.settingsButton.layer.borderWidth = 1
-        self.settingsButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.settingsButton.layer.borderColor = UIColor.black.cgColor
         self.settingsButton.clipsToBounds = true
         
-        NSLog("\(__FUNCTION__) END")
+        NSLog("\(#function) END")
 
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Segue
     }
 
