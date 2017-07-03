@@ -44,7 +44,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard
         
-        if let isGaming: Int = defaults.integer(forKey: "isGaming") {
+        if let isGaming : Int = defaults.integer(forKey: "isGaming") {
             if isGaming == 1 {
                 performSegue(withIdentifier: "cancelPlayersSegue", sender: nil)
             }
@@ -170,7 +170,7 @@ class PlayersViewController: UIViewController, UITextFieldDelegate {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        NSLog("PVC - prepareForSegue - segue = \(segue.identifier)")
+        NSLog("PVC - prepareForSegue - segue = \(String(describing: segue.identifier))")
         if segue.identifier == "gameSegue" {
             
         } else if segue.identifier == "cancelPlayersSegue" {
